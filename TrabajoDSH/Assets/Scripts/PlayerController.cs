@@ -18,12 +18,17 @@ public class PlayerController : MonoBehaviour
     // Movimiento vertical:
     [SerializeField] float gravedad = -30.0f;
     Vector3 verticalVel = Vector3.zero;
+
+    [Tooltip("Layer que el script detecta como suelo para poder saltar")]
     [SerializeField] LayerMask groundMask;
     bool isGrounded;
 
     // Salto:
     [SerializeField] float alturaSalto = 3.5f;
     bool jump;
+
+    // Camara que sigue al jugador:
+    [SerializeField] Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +50,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Mover el jugador horizontalmente:
-        Vector3 horizontalVel = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * velocidad;
+        Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
         controller.Move(horizontalVel * Time.deltaTime);
 
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
