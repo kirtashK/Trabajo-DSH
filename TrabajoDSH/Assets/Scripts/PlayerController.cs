@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     // Movimiento horizontal:
     Vector2 horizontalInput;
     [SerializeField] CharacterController controller;
+
+    [Tooltip("Velocidad del jugador")]
     [SerializeField] float velocidad = 11.0f;
 
     // Movimiento vertical:
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     bool jump;
 
     // Camara que sigue al jugador:
+    [Tooltip("Camara asignada al jugador")]
     [SerializeField] Camera cam;
 
     // Start is called before the first frame update
