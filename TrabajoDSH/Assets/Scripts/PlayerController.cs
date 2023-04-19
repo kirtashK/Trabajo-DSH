@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Camara asignada al jugador")]
     [SerializeField] Camera cam;
 
+    // Salud del jugador:
+    [Tooltip("Salud del jugador, 2 al principio")]
+    [SerializeField] int salud = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,5 +101,20 @@ public class PlayerController : MonoBehaviour
     void OnJumpPressed()
     {
         jump = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Si tocamos el lado de un enemigo, perdemos vida, si tocamos su cabeza, le matamos
+        if (other.gameObject.tag == "EnemigoLado")
+        {
+            salud -= 1;
+            Debug.Log("Has perdido salud!");
+        }
+        else if (other.gameObject.tag == "EnemigoTop")
+        {
+            Destroy(other.transform.parent.gameObject);
+            Debug.Log("Me has matado!");
+        }
     }
 }
