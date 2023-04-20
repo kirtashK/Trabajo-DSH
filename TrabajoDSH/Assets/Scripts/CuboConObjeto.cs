@@ -31,7 +31,7 @@ public class CuboConObjeto : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Instantiate(prefab, puntoSpawn.transform.position, Quaternion.identity);
-            Debug.Log("El jugador ha tocado el trigger.");
+            ////Debug.Log("El jugador ha tocado el trigger.");
             gameObject.SetActive(false);
         }
     }

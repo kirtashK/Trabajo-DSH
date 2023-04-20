@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 750687669924464499}
   - component: {fileID: 4451001053102606550}
   - component: {fileID: 1883022144632454172}
+  - component: {fileID: 259946923154720373}
+  - component: {fileID: 2158197011784536004}
   m_Layer: 0
   m_Name: Moneda
-  m_TagString: Untagged
+  m_TagString: Moneda
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &259946923154720373
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81393383082122697}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.030000001}
+  m_Center: {x: 0, y: -2.6645354e-17, z: 0.015000001}
+--- !u!114 &2158197011784536004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81393383082122697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17832ad430a451c4f9eb73ef05dc8151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 150

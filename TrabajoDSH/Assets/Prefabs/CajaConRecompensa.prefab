@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1346518895912653435}
   - component: {fileID: 891722423}
   m_Layer: 6
-  m_Name: Cubo con objeto
+  m_Name: CajaConRecompensa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a048fc945f84874490822adecf9f798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5784641807289759463, guid: 2c9c1b202a1a9054fa35742affd8890d, type: 3}
+  prefab: {fileID: 1316190064508810968, guid: 349109c3a466e8d458088408ede5573f, type: 3}
   puntoSpawn: {fileID: 7429863127696197738}
 --- !u!1 &7429863127696197738
 GameObject:

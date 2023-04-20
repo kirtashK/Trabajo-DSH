@@ -6,6 +6,10 @@ TagManager:
   tags:
   - EnemigoLado
   - EnemigoTop
+  - Moneda
+  - PowerUp
+  - FlorDeFuego
+  - VidaExtra
   layers:
   - Default
   - TransparentFX
