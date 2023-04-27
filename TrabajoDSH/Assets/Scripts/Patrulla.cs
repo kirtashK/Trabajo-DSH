@@ -9,7 +9,8 @@ public class Patrulla : MonoBehaviour
     [Tooltip("Vector de posiciones que el objeto seguirá en orden, haciendo un bucle")]
     [SerializeField] Transform[] waypoints;
     int indice = 0;
-    float velocidad = 2.0f;
+    [Tooltip("Velocidad de movimiento")]
+    [SerializeField] float velocidad = 2.0f;
 
     #endregion
 
