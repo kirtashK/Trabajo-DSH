@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Controlador del jugador")]
     [SerializeField] CharacterController controller;
     [Tooltip("Velocidad del jugador")]
+    [Range(1.0f, 30.0f)]
     [SerializeField] float velocidad = 11.0f;
 
     // Movimiento vertical:
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     // Salto:
     [Tooltip("Altura del salto que realiza el jugador")]
+    [Range(1.0f, 10.0f)]
     [SerializeField] float alturaSalto = 3.5f;
     bool jump;
 
@@ -52,6 +54,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform puntoCaida;
 
     #endregion
+
+    // Propiedad para modificar/devolver atributos privados:
+    public int Salud
+    {
+        get { return salud; }
+        set { salud = value; }
+    }
+
+    public int Vidas
+    {
+        get { return vidas; }
+        set { vidas = value; }
+    }
+
+    public int Puntuacion
+    {
+        get { return puntuacion; }
+        set { puntuacion = value; }
+    }
 
     //* ################
 
@@ -81,6 +102,8 @@ public class PlayerController : MonoBehaviour
         //! El jugador ha de mirar hacia donde se mueve, transform.lookat?
         //! Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
 
+        //TODO bloques destructibles
+
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
         if (jump)
         {
@@ -109,8 +132,8 @@ public class PlayerController : MonoBehaviour
             //TODO Has perdido, cargar escena de derrota
         }
 
-        //TODO Reducir tamaño jugador si salud pasa de 2 a 1? Usar una funcion mejor, que reciba si crece o aumenta, y modificar escala Y jugador
-        //TODO Cambiar modelo de fuego a normal al perder salud, usar funcion
+        //TODO Reducir tamaño jugador si salud pasa de 2 a 1, o aumentar si pasa de 1 a 2. Usar una funcion mejor, que reciba si crece o aumenta, y modificar escala Y jugador
+        //TODO Cambiar modelo de fuego a normal al perder salud, o de normal a fuego al ganar flor, usar funcion
 
         //TODO Flor de Fuego, solo cuando salud == 3, el jugador puede disparar bolas de fuego
         /*if (salud == 3)
@@ -171,45 +194,6 @@ public class PlayerController : MonoBehaviour
             puntuacion += 25;
             Destroy(other.transform.parent.gameObject);
             Debug.Log("Me has matado! Puntuacion: " + puntuacion);
-        }
-        // Codigo de los powerup:
-        else if (other.gameObject.tag == "VidaExtra")
-        {
-            vidas++;
-            Debug.Log("Has ganado una vida extra! Vidas: " + vidas);
-            Destroy(other.gameObject);
-        }
-        else if (other.gameObject.tag == "FlorDeFuego")
-        {
-            salud = 3;
-
-            //TODO Cambiar modelo
-            //TODO aumentar tamaño si salud == 1, llamar funcion para cambiar escala Y
-
-            Debug.Log("Has cogido una flor de fuego! Salud: " + salud);
-            Destroy(other.gameObject);
-        }
-        else if (other.gameObject.tag == "PowerUp")
-        {
-            // Si tenemos 1 de salud, nos curamos a 2 de salud, sino, ganamos puntuación
-            if (salud < 2)
-            {
-                salud = 2;
-                
-                //TODO Aumentar tamaño jugador? llamar funcion para cambiar escala Y
-            }
-            else
-            {
-                puntuacion += 50;
-            }
-            Debug.Log("Has cogido un powerup! Salud: " + salud + " Puntuacion: " + puntuacion);
-            Destroy(other.gameObject);
-        }
-        else if (other.gameObject.tag == "Moneda")
-        {
-            puntuacion += 10;
-            Debug.Log("Has cogido una moneda! Puntuacion: " + puntuacion);
-            Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "CambiarNivel")
         {
