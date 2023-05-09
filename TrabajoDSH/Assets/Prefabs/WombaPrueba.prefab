@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1219355742191856876}
   - component: {fileID: 1219355742191856875}
   m_Layer: 0
-  m_Name: Womba
+  m_Name: WombaPrueba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

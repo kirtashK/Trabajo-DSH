@@ -53,6 +53,12 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Posición donde el jugador será movido a spawn al caer debajo de la posicion Y de puntoCaida")]
     [SerializeField] Transform puntoCaida;
 
+    //TODO Empujar el jugador al recibir daño
+    [SerializeField] float fuerzaEmpuje = 10f;
+    [SerializeField] float duracionEmpuje = 0.2f;
+    [SerializeField] float tiempoEspera = 0.5f;
+    bool empujando = false;
+
     #endregion
 
     // Propiedad para modificar/devolver atributos privados:
@@ -102,10 +108,6 @@ public class PlayerController : MonoBehaviour
         //! El jugador ha de mirar hacia donde se mueve, transform.lookat?
         //! Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
 
-        //TODO bloques destructibles
-
-        //TODO el jugador es empujado al recibir daño de un enemigo
-
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
         if (jump)
         {
@@ -128,7 +130,8 @@ public class PlayerController : MonoBehaviour
             salud = 2;
             vidas--;
 
-            //TODO tamaño jugador
+            // Aumentar tamaño
+            CambiarTamaño(true);
             
             // Mover el jugador a la posicion de spawn
             transform.position = spawn.position; 
@@ -140,7 +143,6 @@ public class PlayerController : MonoBehaviour
             //TODO sonido derrota
         }
 
-        //TODO Reducir tamaño jugador si salud pasa de 2 a 1, o aumentar si pasa de 1 a 2. Usar una funcion mejor, que reciba si crece o aumenta, y modificar escala Y jugador
         //TODO Cambiar modelo de fuego a normal al perder salud, o de normal a fuego al ganar flor, usar funcion
 
         //TODO Flor de Fuego, solo cuando salud == 3, el jugador puede disparar bolas de fuego
@@ -200,7 +202,33 @@ public class PlayerController : MonoBehaviour
             puntuacion -= 50;
             Debug.Log("Has perdido salud! Salud actual: " + salud);
 
+            //TODO Al chocarse con un enemigo de lado, empujar al jugador
+            /*
+            if (!empujando)
+            {
+                StartCoroutine(Empujar(other.gameObject));
+            }
+            
+            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 direccionEmpuje = (transform.position - other.transform.position).normalized;
+                rb.AddForce(direccionEmpuje * fuerzaEmpuje, ForceMode.Impulse);
+            }
+            */
+
             //TODO si salud = 3 antes de chocarse, cambiar modelo, si salud = 2, reducir tamaño
+            /*
+            if (salud == 2)
+            {
+                // Cambiar modelo, funcion?
+            }
+            else */if (salud == 1)
+            {
+                // Reducir tamaño
+                CambiarTamaño(false);
+            }
+            
 
             //TODO sonido daño
         }
@@ -210,6 +238,12 @@ public class PlayerController : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
             Debug.Log("Me has matado! Puntuacion: " + puntuacion);
         }
+        else if (other.gameObject.tag == "BloqueDestructible")
+        {
+            Destroy(other.gameObject);
+
+            //TODO animacion o particulas de romper bloque?
+        }
         else if (other.gameObject.tag == "CambiarNivel")
         {
             puntuacion += 100;
@@ -217,7 +251,62 @@ public class PlayerController : MonoBehaviour
 
             //TODO sonido victoria primero? 
 
-            //TODO se ha de pasar puntuacion, salud y vidas al siguiente nivel, singleton?
+            //TODO se ha de pasar puntuacion, tamaño, salud y vidas al siguiente nivel, singleton?
+        }
+    }
+
+    IEnumerator Empujar(GameObject enemigo)
+    {
+        empujando = true;
+        Vector3 direccionEmpuje = (enemigo.transform.position - transform.position).normalized;
+        Vector3 fuerza = direccionEmpuje * fuerzaEmpuje;
+        float tiempoInicio = Time.time;
+
+        while (Time.time < tiempoInicio + duracionEmpuje)
+        {
+            enemigo.transform.Translate(fuerza * Time.deltaTime, Space.World);
+            Debug.Log("El jugador ha sido empujado.");
+            yield return null;
+        }
+        yield return new WaitForSeconds(tiempoEspera);
+        empujando = false;
+    }
+
+    public void CambiarTamaño(bool aumentar)
+    {
+        //TODO Al cambiar tamaño, hacer efecto de crecer varias veces, como en el juego
+        // Velocidad de disminución de la escala
+        float velocidadDisminucion = 1f;
+
+        // Nueva escala del jugador
+        Vector3 nuevaEscala;
+
+        // Si aumentar es true, aumentamos el tamaño del jugador, sino, reducimos el tamaño
+        if (aumentar)
+        {
+            // Multiplicar la escala actual del jugador por dos
+            nuevaEscala = transform.localScale * 2.0f;
+        }
+        else
+        {
+            // Divide la escala actual del jugador por dos
+            nuevaEscala = transform.localScale / 2.0f;
+        }
+
+        // Disminuye o aumenta la escala del jugador suavemente con una velocidad definida
+        StartCoroutine(DisminuirEscalaSuavemente(transform.localScale, nuevaEscala, velocidadDisminucion));
+    }
+
+    // Función que disminuye la escala del jugador suavemente con una velocidad definida
+    private IEnumerator DisminuirEscalaSuavemente(Vector3 escalaInicial, Vector3 escalaFinal, float velocidad)
+    {
+        float tiempo = 0f;
+        while (tiempo < 1f)
+        {
+            // Interpola entre la escala inicial y final del jugador
+            tiempo += Time.deltaTime * velocidad;
+            transform.localScale = Vector3.Lerp(escalaInicial, escalaFinal, tiempo);
+            yield return null;
         }
     }
 }

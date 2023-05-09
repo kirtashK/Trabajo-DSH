@@ -81,10 +81,18 @@ public class PowerUp : MonoBehaviour
             }
             else if (gameObject.tag == "FlorDeFuego")
             {
-                playerController.Salud = 3;
+                Debug.Log("Salud antes de la flor de fuego: " + playerController.Salud);
+                //! No funciona correctamente, parece que Salud no se actualiza bien
+
+                if (playerController.Salud == 1)
+                {
+                    // Aumentar tamaño
+                    playerController.CambiarTamaño(true);
+                }
 
                 //TODO Cambiar modelo jugador, igual hacerlo en playercontroler if salud == 3?
-                //TODO aumentar tamaño si salud == 1, llamar funcion para cambiar escala Y
+
+                playerController.Salud = 3;
 
                 Debug.Log("Has cogido una flor de fuego! Salud: " + playerController.Salud);
                 Destroy(gameObject);
@@ -96,7 +104,8 @@ public class PowerUp : MonoBehaviour
                 {
                     playerController.Salud = 2;
                     
-                    //TODO Aumentar tamaño jugador? llamar funcion para cambiar escala Y
+                    // Aumentar tamaño
+                    playerController.CambiarTamaño(true);
                 }
                 else
                 {

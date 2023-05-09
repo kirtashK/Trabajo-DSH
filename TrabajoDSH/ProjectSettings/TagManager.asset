@@ -10,6 +10,7 @@ TagManager:
   - PowerUp
   - FlorDeFuego
   - VidaExtra
+  - BloqueDestructible
   layers:
   - Default
   - TransparentFX
