@@ -42,7 +42,7 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO Comprobar si el jugador esta cerca para empezar a moverse
+        //TODO Comprobar si el jugador esta cerca para empezar a moverse?
         if (puedeMoverse)
         {
             // Destruir el powerUp si se cae del nivel:
@@ -72,6 +72,7 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            //TODO sonidos
             if (gameObject.tag == "VidaExtra")
             {
                 playerController.Vidas++;

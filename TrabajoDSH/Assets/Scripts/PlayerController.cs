@@ -104,12 +104,16 @@ public class PlayerController : MonoBehaviour
 
         //TODO bloques destructibles
 
+        //TODO el jugador es empujado al recibir daño de un enemigo
+
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
         if (jump)
         {
             if (isGrounded)
             {
                 verticalVel.y = Mathf.Sqrt(-2f * alturaSalto * gravedad);
+
+                //TODO sonido salto
             }
             jump = false;
         }
@@ -123,6 +127,8 @@ public class PlayerController : MonoBehaviour
         {
             salud = 2;
             vidas--;
+
+            //TODO tamaño jugador
             
             // Mover el jugador a la posicion de spawn
             transform.position = spawn.position; 
@@ -130,6 +136,8 @@ public class PlayerController : MonoBehaviour
         else if (salud == 0 && vidas == 0)
         {
             //TODO Has perdido, cargar escena de derrota
+
+            //TODO sonido derrota
         }
 
         //TODO Reducir tamaño jugador si salud pasa de 2 a 1, o aumentar si pasa de 1 a 2. Usar una funcion mejor, que reciba si crece o aumenta, y modificar escala Y jugador
@@ -148,6 +156,8 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawn.position;
             salud--;
+
+            //TODO sonido daño?
         }
     }
 
@@ -157,6 +167,7 @@ public class PlayerController : MonoBehaviour
         control = new Controls();
         jugador = control.Jugador;
 
+        //* Input:
         // Jugador.[accion].performed += ctx => cosas a hacer
         // Movimiento horizontal:
         jugador.Movimiento.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
@@ -188,6 +199,10 @@ public class PlayerController : MonoBehaviour
             salud -= 1;
             puntuacion -= 50;
             Debug.Log("Has perdido salud! Salud actual: " + salud);
+
+            //TODO si salud = 3 antes de chocarse, cambiar modelo, si salud = 2, reducir tamaño
+
+            //TODO sonido daño
         }
         else if (other.gameObject.tag == "EnemigoTop")
         {
@@ -199,6 +214,10 @@ public class PlayerController : MonoBehaviour
         {
             puntuacion += 100;
             //TODO Cambiar nivel, scenemanagment, pedir nivel como variable publica?
+
+            //TODO sonido victoria primero? 
+
+            //TODO se ha de pasar puntuacion, salud y vidas al siguiente nivel, singleton?
         }
     }
 }
