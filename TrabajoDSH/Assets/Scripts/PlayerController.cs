@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,10 +14,10 @@ public class PlayerController : MonoBehaviour
     Controls control;
     Controls.JugadorActions jugador;
 
-    //Interfaz
-    public Text TextSalud;
-    public Text TextVidas;
-    public Text TextPuntuacion;
+    //Interfaz:
+    [SerializeField] TextMeshProUGUI TextSalud;
+    [SerializeField] TextMeshProUGUI TextVidas;
+    [SerializeField] TextMeshProUGUI TextPuntuacion;
 
     // Movimiento horizontal:
     Vector2 horizontalInput;
@@ -135,9 +136,9 @@ public class PlayerController : MonoBehaviour
         if (salud == 0 && vidas > 0)
         {
             salud = 2;
-            TextSalud.text = "Salud : " + salud;
+            //TextSalud.text = "Salud: " + salud;
             vidas--;
-            TextVidas.text = "Vidas : " + vidas;
+            //TextVidas.text = "Vidas: " + vidas;
             // Aumentar tamaño
             CambiarTamaño(true);
             
@@ -166,10 +167,15 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawn.position;
             salud --;
-            TextSalud.text = "Salud : " + salud;
+            //TextSalud.text = "Salud: " + salud;
 
             //TODO sonido daño?
         }
+
+        // Actualizar textos
+        TextPuntuacion.text = "Puntuación: " + puntuacion;
+        TextSalud.text = "Salud: " + salud;
+        TextVidas.text = "Vidas: " + vidas;
     }
 
     void Awake()
@@ -210,7 +216,7 @@ public class PlayerController : MonoBehaviour
             salud -= 1;
             TextSalud.text = "Salud : " + salud;
             puntuacion -= 50;
-            TextPuntuacion.text = "Puntuacion : " + puntuacion;
+            //TextPuntuacion.text = "Puntuación: " + puntuacion;
             Debug.Log("Has perdido salud! Salud actual: " + salud);
 
             //TODO Al chocarse con un enemigo de lado, empujar al jugador
@@ -246,7 +252,7 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.tag == "EnemigoTop")
         {
             puntuacion += 25;
-            TextPuntuacion.text = "Puntuacion : " + puntuacion;
+            //TextPuntuacion.text = "Puntuación: " + puntuacion;
             Destroy(other.transform.parent.gameObject);
             Debug.Log("Me has matado! Puntuacion: " + puntuacion);
         }
@@ -259,12 +265,12 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.tag == "Moneda")
         {
             puntuacion += 10;
-            TextPuntuacion.text = "Puntuacion : " + puntuacion;
+            //TextPuntuacion.text = "Puntuación: " + puntuacion;
         }
         else if (other.gameObject.tag == "CambiarNivel")
         {
             puntuacion += 100;
-            TextPuntuacion.text = "Puntuacion : " + puntuacion;
+            //TextPuntuacion.text = "Puntuacion : " + puntuacion;
             //TODO Cambiar nivel, scenemanagment, pedir nivel como variable publica?
 
             //TODO sonido victoria primero? 
