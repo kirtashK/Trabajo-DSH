@@ -11,6 +11,7 @@ TagManager:
   - FlorDeFuego
   - VidaExtra
   - BloqueDestructible
+  - CambiarNivel
   layers:
   - Default
   - TransparentFX

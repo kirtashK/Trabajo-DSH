@@ -51,7 +51,7 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO Comprobar si el jugador esta cerca para empezar a moverse?
+        //? Comprobar si el jugador esta cerca para empezar a moverse?
         if (puedeMoverse)
         {
             // Destruir el powerUp si se cae del nivel:
@@ -81,32 +81,26 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //! Parece que hay que buscar el script del jugador de alguna manera con getcomponent, buscar gameobject con name == Jugador?
             //TODO sonidos
             if (gameObject.tag == "VidaExtra")
             {
                 playerController.Vidas++;
                 playerController.Puntuacion += 25;
-                //Debug.Log("Has ganado una vida extra! Vidas: " + playerController.Vidas);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "FlorDeFuego")
             {
                 playerController.Puntuacion += 25;
-                //Debug.Log("Salud antes de la flor de fuego: " + playerController.Salud);
-                //! No funciona correctamente, parece que Salud no se actualiza bien
 
                 if (playerController.Salud == 1)
                 {
                     // Aumentar tamaño
                     playerController.CambiarTamaño(true);
                 }
-
-                //TODO Cambiar modelo jugador, igual hacerlo en playercontroler if salud == 3?
-
                 playerController.Salud = 3;
 
-                //Debug.Log("Has cogido una flor de fuego! Salud: " + playerController.Salud);
+                //TODO Cambiar modelo jugador, igual hacerlo en playercontroler if salud == 3? usar funcion publica de playercontroller?
+
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "PowerUp")
@@ -121,15 +115,13 @@ public class PowerUp : MonoBehaviour
                 }
                 else
                 {
-                    playerController.Puntuacion += 50;
+                    playerController.Puntuacion += 25;
                 }
-                //Debug.Log("Has cogido un powerup! Salud: " + playerController.Salud + " Puntuacion: " + playerController.Puntuacion);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "Moneda")
             {
                 playerController.Puntuacion += 10;
-                //Debug.Log("Has cogido una moneda! Puntuacion: " + playerController.Puntuacion);
                 Destroy(gameObject);
             }
         }

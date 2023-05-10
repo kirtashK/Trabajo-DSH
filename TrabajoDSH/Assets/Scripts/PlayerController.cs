@@ -65,6 +65,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float tiempoEspera = 0.5f;
     bool empujando = false;
 
+    // Nombre de la siguiente escena a cargar al ganar el nivel:
+    [Tooltip("Nombre de la siguiente escena a cargar cuando el jugador entra en la tuberia al final del mapa")]
+    [SerializeField] string escena;
+
     #endregion
 
     // Propiedad para modificar/devolver atributos privados:
@@ -86,7 +90,7 @@ public class PlayerController : MonoBehaviour
         set { puntuacion = value; }
     }
 
-    //* ################
+    //* ######## Variables ########
 
     // Start is called before the first frame update
     void Start()
@@ -98,7 +102,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
-        //! Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
+        //? Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
 
         //* #### Movimiento ####
 
@@ -139,6 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             salud = 2;
             vidas--;
+
             // Aumentar tamaño
             CambiarTamaño(true);
             
@@ -152,7 +157,7 @@ public class PlayerController : MonoBehaviour
             //TODO sonido derrota
         }
 
-        //TODO Cambiar modelo de fuego a normal al perder salud, o de normal a fuego al ganar flor, usar funcion
+        //TODO Cambiar modelo de fuego a normal al perder salud, o de normal a fuego al ganar flor, usar funcion publica
 
         //TODO Flor de Fuego, solo cuando salud == 3, el jugador puede disparar bolas de fuego
         /*if (salud == 3)
@@ -176,8 +181,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-
-
         // Si se cae del nivel (debajo de Y de puntoCaida), mover a spawn y perder salud
         if (transform.position.y < puntoCaida.position.y)
         {
@@ -189,7 +192,7 @@ public class PlayerController : MonoBehaviour
                 CambiarTamaño(false);
             }
 
-            //TODO sonido daño?
+            //TODO sonido daño
         }
     }
 
@@ -205,7 +208,7 @@ public class PlayerController : MonoBehaviour
         jugador.Movimiento.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         // Saltar, llama a la funcion OnJumpPressed, que asigna jump a true:
         jugador.Saltar.performed += _ => OnJumpPressed();
-        //TODO Disparar bola de fuego:
+        //TODO! Disparar bola de fuego:
     }
 
     void OnEnable()
@@ -231,8 +234,6 @@ public class PlayerController : MonoBehaviour
             salud -= 1;
             TextSalud.text = "Salud : " + salud;
             puntuacion -= 50;
-            //TextPuntuacion.text = "Puntuación: " + puntuacion;
-            //Debug.Log("Has perdido salud! Salud actual: " + salud);
 
             //TODO Al chocarse con un enemigo de lado, empujar al jugador
             /*
@@ -253,7 +254,7 @@ public class PlayerController : MonoBehaviour
             /*
             if (salud == 2)
             {
-                // Cambiar modelo, funcion?
+                /// Cambiar modelo, funcion publica
             }
             else */if (salud == 1)
             {
@@ -267,9 +268,7 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.tag == "EnemigoTop")
         {
             puntuacion += 25;
-            //TextPuntuacion.text = "Puntuación: " + puntuacion;
             Destroy(other.transform.parent.gameObject);
-            //Debug.Log("Me has matado! Puntuacion: " + puntuacion);
         }
         else if (other.gameObject.tag == "BloqueDestructible")
         {
@@ -280,12 +279,12 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.tag == "CambiarNivel")
         {
             puntuacion += 100;
-            //TextPuntuacion.text = "Puntuacion : " + puntuacion;
-            //TODO Cambiar nivel, scenemanagment, pedir nivel como variable publica?
-
-            //TODO sonido victoria primero? 
-
+            
+            //TODO sonido victoria primero
+            
             //TODO se ha de pasar puntuacion, tamaño, salud y vidas al siguiente nivel, singleton?
+
+            SceneManager.LoadScene(escena);
         }
     }
 
