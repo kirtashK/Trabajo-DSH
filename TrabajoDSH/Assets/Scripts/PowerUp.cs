@@ -7,7 +7,7 @@ public class PowerUp : MonoBehaviour
 {
     #region Variables
 
-    public PlayerController playerController;
+    PlayerController playerController;
 
     [Tooltip("Velocidad de movimiento del powerup")]
     [Range(1.0f, 20.0f)]
@@ -37,6 +37,15 @@ public class PowerUp : MonoBehaviour
     void Start()
     {
 
+    }
+
+    void Awake()
+    {
+        // Encontrar el jugador:
+        GameObject jugador = GameObject.Find("Jugador");
+
+        // Obtener el script del jugador:
+        playerController = jugador.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -72,16 +81,19 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            //! Parece que hay que buscar el script del jugador de alguna manera con getcomponent, buscar gameobject con name == Jugador?
             //TODO sonidos
             if (gameObject.tag == "VidaExtra")
             {
                 playerController.Vidas++;
-                Debug.Log("Has ganado una vida extra! Vidas: " + playerController.Vidas);
+                playerController.Puntuacion += 25;
+                //Debug.Log("Has ganado una vida extra! Vidas: " + playerController.Vidas);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "FlorDeFuego")
             {
-                Debug.Log("Salud antes de la flor de fuego: " + playerController.Salud);
+                playerController.Puntuacion += 25;
+                //Debug.Log("Salud antes de la flor de fuego: " + playerController.Salud);
                 //! No funciona correctamente, parece que Salud no se actualiza bien
 
                 if (playerController.Salud == 1)
@@ -94,13 +106,13 @@ public class PowerUp : MonoBehaviour
 
                 playerController.Salud = 3;
 
-                Debug.Log("Has cogido una flor de fuego! Salud: " + playerController.Salud);
+                //Debug.Log("Has cogido una flor de fuego! Salud: " + playerController.Salud);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "PowerUp")
             {
                 // Si tenemos 1 de salud, nos curamos a 2 de salud, sino, ganamos puntuación
-                if (playerController.Salud < 2)
+                if (playerController.Salud == 1)
                 {
                     playerController.Salud = 2;
                     
@@ -111,13 +123,13 @@ public class PowerUp : MonoBehaviour
                 {
                     playerController.Puntuacion += 50;
                 }
-                Debug.Log("Has cogido un powerup! Salud: " + playerController.Salud + " Puntuacion: " + playerController.Puntuacion);
+                //Debug.Log("Has cogido un powerup! Salud: " + playerController.Salud + " Puntuacion: " + playerController.Puntuacion);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "Moneda")
             {
                 playerController.Puntuacion += 10;
-                Debug.Log("Has cogido una moneda! Puntuacion: " + playerController.Puntuacion);
+                //Debug.Log("Has cogido una moneda! Puntuacion: " + playerController.Puntuacion);
                 Destroy(gameObject);
             }
         }

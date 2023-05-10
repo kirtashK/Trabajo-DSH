@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Posición donde el jugador será movido a spawn al caer debajo de la posicion Y de puntoCaida")]
     [SerializeField] Transform puntoCaida;
 
-    //TODO Empujar el jugador al recibir daño
+    //TODO Empujar el jugador al recibir daño, ahora mismo no funciona
     [SerializeField] float fuerzaEmpuje = 10f;
     [SerializeField] float duracionEmpuje = 0.2f;
     [SerializeField] float tiempoEspera = 0.5f;
@@ -91,14 +91,17 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TextSalud.text = "Salud : " + salud;
-        //TextVidas.text = "Vidas : " + vidas;
-        //TextPuntuacion.text = "Puntuacion : " + puntuacion;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
+        //! Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
+
+        //* #### Movimiento ####
+
         // Creamos una esfera invisible que compruebe si toca suelo con layer = Suelo, si toca suelo, isGrounded = True:
         float halfHeight = controller.height * 0.5f;
         Vector3 bottomPoint = transform.TransformPoint(controller.center - Vector3.up * halfHeight);
@@ -112,9 +115,6 @@ public class PlayerController : MonoBehaviour
         // Mover el jugador horizontalmente:
         Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
         controller.Move(horizontalVel * Time.deltaTime);
-
-        //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
-        //! Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
 
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
         if (jump)
@@ -132,13 +132,13 @@ public class PlayerController : MonoBehaviour
         verticalVel.y += gravedad * Time.deltaTime;
         controller.Move(verticalVel * Time.deltaTime);
 
+        //* #### Fin movimiento ####
+
         // Salud y vidas:
         if (salud == 0 && vidas > 0)
         {
             salud = 2;
-            //TextSalud.text = "Salud: " + salud;
             vidas--;
-            //TextVidas.text = "Vidas: " + vidas;
             // Aumentar tamaño
             CambiarTamaño(true);
             
@@ -162,20 +162,35 @@ public class PlayerController : MonoBehaviour
             // Si la bola de fuego da a un enemigo, eliminarlo o hacerle daño, script en la bola que compruebe el tag
         }*/
 
-        // Si se cae del nivel (debajo de Y de puntoCaida), mover a spawn y perder salud
-        if (transform.position.y < puntoCaida.position.y)
+        // Arreglar la puntuación para que no sea menor que 0, para evitar mostrar puntuacion: -10
+        if (puntuacion < 0)
         {
-            transform.position = spawn.position;
-            salud --;
-            //TextSalud.text = "Salud: " + salud;
-
-            //TODO sonido daño?
+            puntuacion = 0;
         }
 
         // Actualizar textos
         TextPuntuacion.text = "Puntuación: " + puntuacion;
         TextSalud.text = "Salud: " + salud;
         TextVidas.text = "Vidas: " + vidas;
+    }
+
+    void FixedUpdate()
+    {
+
+
+        // Si se cae del nivel (debajo de Y de puntoCaida), mover a spawn y perder salud
+        if (transform.position.y < puntoCaida.position.y)
+        {
+            transform.position = spawn.position;
+            salud--;
+
+            if (salud == 1)
+            {
+                CambiarTamaño(false);
+            }
+
+            //TODO sonido daño?
+        }
     }
 
     void Awake()
@@ -217,7 +232,7 @@ public class PlayerController : MonoBehaviour
             TextSalud.text = "Salud : " + salud;
             puntuacion -= 50;
             //TextPuntuacion.text = "Puntuación: " + puntuacion;
-            Debug.Log("Has perdido salud! Salud actual: " + salud);
+            //Debug.Log("Has perdido salud! Salud actual: " + salud);
 
             //TODO Al chocarse con un enemigo de lado, empujar al jugador
             /*
@@ -254,18 +269,13 @@ public class PlayerController : MonoBehaviour
             puntuacion += 25;
             //TextPuntuacion.text = "Puntuación: " + puntuacion;
             Destroy(other.transform.parent.gameObject);
-            Debug.Log("Me has matado! Puntuacion: " + puntuacion);
+            //Debug.Log("Me has matado! Puntuacion: " + puntuacion);
         }
         else if (other.gameObject.tag == "BloqueDestructible")
         {
             Destroy(other.gameObject);
 
             //TODO animacion o particulas de romper bloque?
-        }
-        else if (other.gameObject.tag == "Moneda")
-        {
-            puntuacion += 10;
-            //TextPuntuacion.text = "Puntuación: " + puntuacion;
         }
         else if (other.gameObject.tag == "CambiarNivel")
         {
@@ -309,7 +319,7 @@ public class PlayerController : MonoBehaviour
         if (aumentar)
         {
             // Multiplicar la escala actual del jugador por dos
-            nuevaEscala = transform.localScale * 1.0f;
+            nuevaEscala = transform.localScale * 2.0f;
         }
         else
         {
