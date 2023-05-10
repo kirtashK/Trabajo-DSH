@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
         controller.Move(horizontalVel * Time.deltaTime);
 
-        //! El jugador ha de mirar hacia donde se mueve, transform.lookat?
+        //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
         //! Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
 
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:

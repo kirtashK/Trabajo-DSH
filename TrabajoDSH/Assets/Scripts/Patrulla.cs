@@ -23,6 +23,7 @@ public class Patrulla : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //TODO cuando el jugador se acerca, el enemigo empieza a perseguirlo, usar AI?
         Transform wp = waypoints[indice];
         if (Vector3.Distance(transform.position, wp.position) < 0.01f)
         {
