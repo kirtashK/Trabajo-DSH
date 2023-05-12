@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 19318677}
   - component: {fileID: 19318676}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: btnNivel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 180073203}
   - component: {fileID: 180073202}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: btnNivel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 988079649}
   - component: {fileID: 988079648}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: btnNivel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 1021996902}
   - component: {fileID: 1021996901}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: btnNivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 1122148928}
   - component: {fileID: 1122148929}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MusicaMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,7 +1353,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff214910f5760046aeba82c5d1a2945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: 1431076990}
+  btnComenzarJuego: {fileID: 1431076990}
+  btnNivel1: {fileID: 988079648}
+  btnNivel2: {fileID: 180073202}
+  btnNivel3: {fileID: 1021996901}
+  btnNivel4: {fileID: 19318676}
 --- !u!1 &1155605237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1439,7 @@ GameObject:
   - component: {fileID: 1431076991}
   - component: {fileID: 1431076990}
   m_Layer: 5
-  m_Name: Button
+  m_Name: btnComenzarJuego
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
