@@ -7,7 +7,7 @@ public class PowerUp : MonoBehaviour
 {
     #region Variables
 
-    public PlayerController playerController;
+    PlayerController playerController;
 
     [Tooltip("Velocidad de movimiento del powerup")]
     [Range(1.0f, 20.0f)]
@@ -39,10 +39,19 @@ public class PowerUp : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        // Encontrar el jugador:
+        GameObject jugador = GameObject.Find("Jugador");
+
+        // Obtener el script del jugador:
+        playerController = jugador.GetComponent<PlayerController>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        //TODO Comprobar si el jugador esta cerca para empezar a moverse?
+        //? Comprobar si el jugador esta cerca para empezar a moverse?
         if (puedeMoverse)
         {
             // Destruir el powerUp si se cae del nivel:
@@ -76,31 +85,28 @@ public class PowerUp : MonoBehaviour
             if (gameObject.tag == "VidaExtra")
             {
                 playerController.Vidas++;
-                Debug.Log("Has ganado una vida extra! Vidas: " + playerController.Vidas);
+                playerController.Puntuacion += 25;
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "FlorDeFuego")
             {
-                Debug.Log("Salud antes de la flor de fuego: " + playerController.Salud);
-                //! No funciona correctamente, parece que Salud no se actualiza bien
+                playerController.Puntuacion += 25;
 
                 if (playerController.Salud == 1)
                 {
                     // Aumentar tamaño
                     playerController.CambiarTamaño(true);
                 }
-
-                //TODO Cambiar modelo jugador, igual hacerlo en playercontroler if salud == 3?
-
                 playerController.Salud = 3;
 
-                Debug.Log("Has cogido una flor de fuego! Salud: " + playerController.Salud);
+                //TODO Cambiar modelo jugador, igual hacerlo en playercontroler if salud == 3? usar funcion publica de playercontroller?
+
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "PowerUp")
             {
                 // Si tenemos 1 de salud, nos curamos a 2 de salud, sino, ganamos puntuación
-                if (playerController.Salud < 2)
+                if (playerController.Salud == 1)
                 {
                     playerController.Salud = 2;
                     
@@ -109,15 +115,13 @@ public class PowerUp : MonoBehaviour
                 }
                 else
                 {
-                    playerController.Puntuacion += 50;
+                    playerController.Puntuacion += 25;
                 }
-                Debug.Log("Has cogido un powerup! Salud: " + playerController.Salud + " Puntuacion: " + playerController.Puntuacion);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "Moneda")
             {
                 playerController.Puntuacion += 10;
-                Debug.Log("Has cogido una moneda! Puntuacion: " + playerController.Puntuacion);
                 Destroy(gameObject);
             }
         }

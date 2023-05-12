@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a5e1bbd0ee0b4380844c175806ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
+  playerController: {fileID: 0}
   velocidad: 6
   puedeMoverse: 1
   forwardDirection: {x: 0, y: 0, z: 1}
@@ -165,5 +165,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
