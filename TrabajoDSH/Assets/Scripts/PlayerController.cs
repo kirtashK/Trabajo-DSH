@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI TextSalud;
     [SerializeField] TextMeshProUGUI TextVidas;
     [SerializeField] TextMeshProUGUI TextPuntuacion;
+    [SerializeField] TextMeshProUGUI TextMonedas;
 
     // Movimiento horizontal:
     Vector2 horizontalInput;
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
 
     // Puntuación del jugador:
     int puntuacion = 0;
+
+    //Monedas recogidas por el jugadoe:
+    int monedas = 0;
 
     [Tooltip("Posición donde se moverá el jugador al perder vida/caer")]
     [SerializeField] Transform spawn;
@@ -88,6 +92,12 @@ public class PlayerController : MonoBehaviour
     {
         get { return puntuacion; }
         set { puntuacion = value; }
+    }
+
+    public int Monedas
+    {
+        get{ return monedas; }
+        set{ monedas = value; }
     }
 
     //* ######## Variables ########
@@ -174,9 +184,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Actualizar textos
-        TextPuntuacion.text = "Puntuación: " + puntuacion;
+        TextPuntuacion.text = " " + puntuacion;
         TextSalud.text = "Salud: " + salud;
         TextVidas.text = "Vidas: " + vidas;
+        TextMonedas.text = "x" + monedas;
     }
 
     void FixedUpdate()
@@ -275,6 +286,16 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
 
             //TODO animacion o particulas de romper bloque?
+        }
+        else if (other.gameObject.tag == "Moneda")
+        {
+            monedas++;
+                if(monedas>=100)
+                {
+                    monedas = 0;
+                    vidas++;
+                }
+
         }
         else if (other.gameObject.tag == "CambiarNivel")
         {

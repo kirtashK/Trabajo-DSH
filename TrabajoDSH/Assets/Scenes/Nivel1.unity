@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5586981, g: 0.8086879, b: 0.99086803, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1334,7 +1334,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6468,6 +6468,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4784542591849430377, guid: 6cb9ce603dcbbc34a9ef54fa326e42ee, type: 3}
+      propertyPath: ring
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b8f41d3d2759aa4bb5940aa601590ea, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cb9ce603dcbbc34a9ef54fa326e42ee, type: 3}
 --- !u!4 &1166406534 stripped
@@ -8802,6 +8806,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1562468375 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6238008383228328383, guid: 028944e10d4a20f40bced8336f111e2d, type: 3}
+  m_PrefabInstance: {fileID: 1562468371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1564309777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9835,6 +9850,10 @@ PrefabInstance:
       propertyPath: puntoCaida
       value: 
       objectReference: {fileID: 1100491911}
+    - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
+      propertyPath: TextMonedas
+      value: 
+      objectReference: {fileID: 1562468375}
     - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
       propertyPath: TextPuntuacion
       value: 
