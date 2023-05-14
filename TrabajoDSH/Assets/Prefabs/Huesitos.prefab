@@ -203,6 +203,8 @@ GameObject:
   - component: {fileID: 2193948013734291650}
   - component: {fileID: 1871458286852310926}
   - component: {fileID: 1871458286852310929}
+  - component: {fileID: 4953838330070055972}
+  - component: {fileID: -7431567418138400443}
   m_Layer: 0
   m_Name: Huesitos
   m_TagString: Untagged
@@ -265,6 +267,46 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   velocidad: 2
+--- !u!114 &4953838330070055972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529439042553131640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005b84192a68bf44d89ddb82df60670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 0
+  Rango: 0
+  capaJugador:
+    serializedVersion: 2
+    m_Bits: 0
+  player: {fileID: 0}
+--- !u!195 &-7431567418138400443
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529439042553131640}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1656693517036015907
 GameObject:
   m_ObjectHideFlags: 0
