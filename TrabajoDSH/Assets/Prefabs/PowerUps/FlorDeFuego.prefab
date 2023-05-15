@@ -50,13 +50,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a5e1bbd0ee0b4380844c175806ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   velocidad: 6
   puedeMoverse: 1
   forwardDirection: {x: 0, y: 0, z: 1}
   reflectionIgnoreTags:
   - Player
   puntoCaida: {fileID: 3895792020849102634, guid: 969b108702429774f8f3be3d352f2427, type: 3}
+  vidaExtraSound: {fileID: 8300000, guid: 7ee1721cf2798a0419d052b6fbaf14fe, type: 3}
+  monedaSound: {fileID: 8300000, guid: 3b8f41d3d2759aa4bb5940aa601590ea, type: 3}
 --- !u!33 &2153505328432380423
 MeshFilter:
   m_ObjectHideFlags: 0

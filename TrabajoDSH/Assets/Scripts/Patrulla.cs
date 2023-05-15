@@ -12,27 +12,33 @@ public class Patrulla : MonoBehaviour
     [Tooltip("Velocidad de movimiento")]
     [SerializeField] float velocidad = 2.0f;
 
+    DetectarJugador detectarJugador;
+
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Obtener el script del jugador:
+        detectarJugador = GetComponent<DetectarJugador>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //TODO cuando el jugador se acerca, el enemigo empieza a perseguirlo, usar AI?
-        Transform wp = waypoints[indice];
-        if (Vector3.Distance(transform.position, wp.position) < 0.01f)
+        // Si no esta alerta, patrulla:
+        if (!detectarJugador.alerta)
         {
-            indice = (indice + 1) % waypoints.Length;
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, wp.position, velocidad * Time.deltaTime);
-            transform.LookAt(wp.position);
+            Transform wp = waypoints[indice];
+            if (Vector3.Distance(transform.position, wp.position) < 0.01f)
+            {
+                indice = (indice + 1) % waypoints.Length;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, wp.position, velocidad * Time.deltaTime);
+                transform.LookAt(wp.position);
+            }
         }
     }
 }

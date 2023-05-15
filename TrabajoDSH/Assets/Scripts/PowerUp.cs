@@ -29,6 +29,11 @@ public class PowerUp : MonoBehaviour
     [Tooltip("Posición donde el powerup será destruido al caer debajo de la posicion Y de puntoCaida")]
     [SerializeField] Transform puntoCaida;
 
+    // Sonidos:
+    AudioSource audioSource;
+    [SerializeField] AudioClip vidaExtraSound;
+    [SerializeField] AudioClip monedaSound;
+
     #endregion
 
     //* ######
@@ -36,16 +41,7 @@ public class PowerUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    void Awake()
-    {
-        // Encontrar el jugador:
-        GameObject jugador = GameObject.Find("Jugador");
-
-        // Obtener el script del jugador:
-        playerController = jugador.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -81,11 +77,17 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //TODO sonidos
+            // Obtener el script del jugador:
+            playerController = other.GetComponent<PlayerController>();
+
             if (gameObject.tag == "VidaExtra")
             {
                 playerController.Vidas++;
                 playerController.Puntuacion += 25;
+
+                // Sonido vida extra:
+                audioSource.PlayOneShot(vidaExtraSound);
+
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "FlorDeFuego")
@@ -121,7 +123,17 @@ public class PowerUp : MonoBehaviour
             }
             else if (gameObject.tag == "Moneda")
             {
+                // Sonido moneda:
+                audioSource.PlayOneShot(monedaSound);
+
+                playerController.Monedas++;
                 playerController.Puntuacion += 10;
+
+                if (playerController.Monedas >= 100)
+                {
+                    playerController.Monedas = 0;
+                    playerController.Vidas++;
+                }
                 Destroy(gameObject);
             }
         }

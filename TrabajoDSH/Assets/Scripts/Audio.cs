@@ -5,13 +5,13 @@ using UnityEngine;
 public class Audio : MonoBehaviour
 {
     
-    private AudioSource audio;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip ring;
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
-        if (audio == null) audio = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class Audio : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            audio.PlayOneShot(ring);
+            audioSource.PlayOneShot(ring);
         }
     }
 }

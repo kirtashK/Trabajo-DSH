@@ -12,7 +12,7 @@ public class DetectarJugador : MonoBehaviour
     //Guardar la posición exacta de nuestro jugador
     public Transform player;
     //Variable que se activara en el momento que el jugador entre en el rango del enemigo
-    bool alerta;
+    public bool alerta;
     
     // Start is called before the first frame update
     void Start()

@@ -50,11 +50,13 @@ public class PlayerController : MonoBehaviour
     int salud = 2;
     // Vidas del jugador, no es lo mismo que salud, si la salud llega a 0, se reduce una vida y salud = 2:
     int vidas = 3;
+    // Booleano para saber si el jugador esta vivo o no, muerto = salud && vidas == 0:
+    bool estaVivo = true;
 
     // Puntuación del jugador:
     int puntuacion = 0;
 
-    //Monedas recogidas por el jugadoe:
+    // Monedas recogidas por el jugador:
     int monedas = 0;
 
     [Tooltip("Posición donde se moverá el jugador al perder vida/caer")]
@@ -72,6 +74,14 @@ public class PlayerController : MonoBehaviour
     // Nombre de la siguiente escena a cargar al ganar el nivel:
     [Tooltip("Nombre de la siguiente escena a cargar cuando el jugador entra en la tuberia al final del mapa")]
     [SerializeField] string escena;
+
+    // Sonidos:
+    AudioSource audioSource;
+    [SerializeField] AudioClip saltoSound;
+    [SerializeField] AudioClip dañoSound;
+    [SerializeField] AudioClip crecerSound;
+    [SerializeField] AudioClip derrotaSound;
+    [SerializeField] AudioClip cambiarNivelSound;
 
     #endregion
 
@@ -105,7 +115,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -127,44 +137,57 @@ public class PlayerController : MonoBehaviour
         }
 
         // Mover el jugador horizontalmente:
-        Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
-        controller.Move(horizontalVel * Time.deltaTime);
+        if (estaVivo)
+        {
+            Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
+            controller.Move(horizontalVel * Time.deltaTime);
+        }
 
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
-        if (jump)
+        if (jump && estaVivo)
         {
             if (isGrounded)
             {
                 verticalVel.y = Mathf.Sqrt(-2f * alturaSalto * gravedad);
 
-                //TODO sonido salto
+                // Sonido salto:
+                audioSource.PlayOneShot(saltoSound);
             }
             jump = false;
         }
 
         // Mover el jugador verticalmente:
-        verticalVel.y += gravedad * Time.deltaTime;
-        controller.Move(verticalVel * Time.deltaTime);
+        if (estaVivo)
+        {
+            verticalVel.y += gravedad * Time.deltaTime;
+            controller.Move(verticalVel * Time.deltaTime);
+        }
 
         //* #### Fin movimiento ####
 
         // Salud y vidas:
         if (salud == 0 && vidas > 0)
         {
+            // Mover el jugador a la posicion de spawn
+            //! No funciona por algun motivo, pero con caida si funciona...
+            transform.position = spawn.position; 
+
             salud = 2;
             vidas--;
 
             // Aumentar tamaño
             CambiarTamaño(true);
-            
-            // Mover el jugador a la posicion de spawn
-            transform.position = spawn.position; 
         }
-        else if (salud == 0 && vidas == 0)
+        else if (salud == 0 && vidas == 0 && estaVivo)
         {
-            //TODO Has perdido, cargar escena de derrota
+            estaVivo = false;
 
-            //TODO sonido derrota
+            // Sonido derrota:
+            audioSource.PlayOneShot(derrotaSound);
+
+            Esperar(2.0f);
+
+            //TODO Has perdido, cargar escena de derrota
         }
 
         //TODO Cambiar modelo de fuego a normal al perder salud, o de normal a fuego al ganar flor, usar funcion publica
@@ -203,7 +226,8 @@ public class PlayerController : MonoBehaviour
                 CambiarTamaño(false);
             }
 
-            //TODO sonido daño
+            // Sonido daño:
+            audioSource.PlayOneShot(dañoSound);
         }
     }
 
@@ -243,7 +267,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "EnemigoLado")
         {
             salud -= 1;
-            TextSalud.text = "Salud : " + salud;
             puntuacion -= 50;
 
             //TODO Al chocarse con un enemigo de lado, empujar al jugador
@@ -274,7 +297,8 @@ public class PlayerController : MonoBehaviour
             }
             
 
-            //TODO sonido daño
+            // Sonido daño:
+            audioSource.PlayOneShot(dañoSound);
         }
         else if (other.gameObject.tag == "EnemigoTop")
         {
@@ -287,26 +311,24 @@ public class PlayerController : MonoBehaviour
 
             //TODO animacion o particulas de romper bloque?
         }
-        else if (other.gameObject.tag == "Moneda")
-        {
-            monedas++;
-                if(monedas>=100)
-                {
-                    monedas = 0;
-                    vidas++;
-                }
-
-        }
         else if (other.gameObject.tag == "CambiarNivel")
         {
             puntuacion += 100;
             
-            //TODO sonido victoria primero
+            // Sonido cambiar de nivel:
+            audioSource.PlayOneShot(cambiarNivelSound);
+
+            Esperar(1.0f);
             
             //TODO se ha de pasar puntuacion, tamaño, salud y vidas al siguiente nivel, singleton?
 
             SceneManager.LoadScene(escena);
         }
+    }
+
+    IEnumerator Esperar(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
     }
 
     IEnumerator Empujar(GameObject enemigo)
@@ -328,7 +350,6 @@ public class PlayerController : MonoBehaviour
 
     public void CambiarTamaño(bool aumentar)
     {
-        //TODO Al cambiar tamaño, hacer efecto de crecer varias veces, como en el juego
         // Velocidad de disminución de la escala
         float velocidadDisminucion = 1f;
 
@@ -340,6 +361,9 @@ public class PlayerController : MonoBehaviour
         {
             // Multiplicar la escala actual del jugador por dos
             nuevaEscala = transform.localScale * 2.0f;
+
+            // Sonido crecer:
+            audioSource.PlayOneShot(crecerSound);
         }
         else
         {
