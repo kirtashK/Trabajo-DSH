@@ -41,6 +41,11 @@ public class PowerUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Encontrar el jugador:
+        GameObject jugador = GameObject.Find("Jugador");
+
+        // Obtener el script del jugador:
+        playerController = jugador.GetComponent<PlayerController>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -78,7 +83,7 @@ public class PowerUp : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             // Obtener el script del jugador:
-            playerController = other.GetComponent<PlayerController>();
+            //playerController = other.GetComponent<PlayerController>();
 
             if (gameObject.tag == "VidaExtra")
             {
@@ -86,7 +91,8 @@ public class PowerUp : MonoBehaviour
                 playerController.Puntuacion += 25;
 
                 // Sonido vida extra:
-                audioSource.PlayOneShot(vidaExtraSound);
+                playerController.Sonido(vidaExtraSound);
+                //audioSource.PlayOneShot(vidaExtraSound);
 
                 Destroy(gameObject);
             }
@@ -100,8 +106,6 @@ public class PowerUp : MonoBehaviour
                     playerController.CambiarTamaño(true);
                 }
                 playerController.Salud = 3;
-
-                //TODO Cambiar modelo jugador, igual hacerlo en playercontroler if salud == 3? usar funcion publica de playercontroller?
 
                 Destroy(gameObject);
             }
@@ -124,7 +128,8 @@ public class PowerUp : MonoBehaviour
             else if (gameObject.tag == "Moneda")
             {
                 // Sonido moneda:
-                audioSource.PlayOneShot(monedaSound);
+                playerController.Sonido(monedaSound);
+                //audioSource.PlayOneShot(monedaSound);
 
                 playerController.Monedas++;
                 playerController.Puntuacion += 10;

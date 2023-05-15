@@ -80,8 +80,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip saltoSound;
     [SerializeField] AudioClip dañoSound;
     [SerializeField] AudioClip crecerSound;
+    [SerializeField] AudioClip ladrilloSound;
     [SerializeField] AudioClip derrotaSound;
     [SerializeField] AudioClip cambiarNivelSound;
+
+    // Modelos del jugador, normal y fuego:
+    public GameObject[] playerModels;
 
     #endregion
 
@@ -110,36 +114,46 @@ public class PlayerController : MonoBehaviour
         set{ monedas = value; }
     }
 
-    //* ######## Variables ########
+    //* ######## Fin Variables ########
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        // Obtener la salud del jugador
+        //int salud = PlayerPrefs.GetInt("salud");
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
-        //? Quizas hacer la esfera dependiendo del modelo, no del jugador entero? hijo de jugador
 
         //* #### Movimiento ####
 
         // Creamos una esfera invisible que compruebe si toca suelo con layer = Suelo, si toca suelo, isGrounded = True:
-        float halfHeight = controller.height * 0.5f;
+        /*float halfHeight = controller.height * 0.5f;
         Vector3 bottomPoint = transform.TransformPoint(controller.center - Vector3.up * halfHeight);
-        isGrounded = Physics.CheckSphere(bottomPoint, 0.1f, groundMask);
+        isGrounded = Physics.CheckSphere(bottomPoint, 0.3f, groundMask);
+        */
+        RaycastHit hit;
+        float height = transform.localScale.y * 1.5f;
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, height, groundMask);
+
         // Si esta en el suelo, deja de ganar velocidad en y:
         if (isGrounded)
         {
             verticalVel.y = 0.0f;
         }
 
+
         // Mover el jugador horizontalmente:
         if (estaVivo)
         {
             Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
+            horizontalVel.y = 0;
             controller.Move(horizontalVel * Time.deltaTime);
         }
 
@@ -151,7 +165,8 @@ public class PlayerController : MonoBehaviour
                 verticalVel.y = Mathf.Sqrt(-2f * alturaSalto * gravedad);
 
                 // Sonido salto:
-                audioSource.PlayOneShot(saltoSound);
+                Sonido(saltoSound);
+                //audioSource.PlayOneShot(saltoSound);
             }
             jump = false;
         }
@@ -170,7 +185,7 @@ public class PlayerController : MonoBehaviour
         {
             // Mover el jugador a la posicion de spawn
             //! No funciona por algun motivo, pero con caida si funciona...
-            transform.position = spawn.position; 
+            transform.position = spawn.position;
 
             salud = 2;
             vidas--;
@@ -183,22 +198,31 @@ public class PlayerController : MonoBehaviour
             estaVivo = false;
 
             // Sonido derrota:
-            audioSource.PlayOneShot(derrotaSound);
+            Sonido(derrotaSound);
+            //audioSource.PlayOneShot(derrotaSound);
 
-            Esperar(2.0f);
+            //Esperar(2.0f);
 
             //TODO Has perdido, cargar escena de derrota
         }
 
-        //TODO Cambiar modelo de fuego a normal al perder salud, o de normal a fuego al ganar flor, usar funcion publica
-
-        //TODO Flor de Fuego, solo cuando salud == 3, el jugador puede disparar bolas de fuego
-        /*if (salud == 3)
+        //Flor de Fuego, solo cuando salud == 3, el jugador puede disparar bolas de fuego y su modelo cambia:
+        if (salud == 3)
         {
+            // Cambiar modelo del jugador a fuego:
+            // Desactivar el modelo normal
+            playerModels[0].SetActive(false);
+
+            // Activar el modelo de fuego
+            playerModels[1].SetActive(true);
+
             // Código para comprobar si se ha pulsado keybinding para disparar
+
             // Disparar la bola de fuego, que se borre al cabo de x tiempo
+
             // Si la bola de fuego da a un enemigo, eliminarlo o hacerle daño, script en la bola que compruebe el tag
-        }*/
+
+        }
 
         // Arreglar la puntuación para que no sea menor que 0, para evitar mostrar puntuacion: -10
         if (puntuacion < 0)
@@ -225,9 +249,19 @@ public class PlayerController : MonoBehaviour
             {
                 CambiarTamaño(false);
             }
+            // Si teniamos flor de fuego:
+            else if (salud == 2)
+            {
+                // Desactivar el modelo normal
+                playerModels[1].SetActive(false);
+
+                // Activar el modelo de fuego
+                playerModels[0].SetActive(true);
+            }
 
             // Sonido daño:
-            audioSource.PlayOneShot(dañoSound);
+            Sonido(dañoSound);
+            //audioSource.PlayOneShot(dañoSound);
         }
     }
 
@@ -269,7 +303,7 @@ public class PlayerController : MonoBehaviour
             salud -= 1;
             puntuacion -= 50;
 
-            //TODO Al chocarse con un enemigo de lado, empujar al jugador
+            //TODO Al chocarse con un enemigo de lado, empujar al jugador o al enemigo
             /*
             if (!empujando)
             {
@@ -284,13 +318,16 @@ public class PlayerController : MonoBehaviour
             }
             */
 
-            //TODO si salud = 3 antes de chocarse, cambiar modelo, si salud = 2, reducir tamaño
-            /*
+            // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
             if (salud == 2)
             {
-                /// Cambiar modelo, funcion publica
+                // Desactivar el modelo normal
+                playerModels[1].SetActive(false);
+
+                // Activar el modelo de fuego
+                playerModels[0].SetActive(true);
             }
-            else */if (salud == 1)
+            else if (salud == 1)
             {
                 // Reducir tamaño
                 CambiarTamaño(false);
@@ -298,7 +335,8 @@ public class PlayerController : MonoBehaviour
             
 
             // Sonido daño:
-            audioSource.PlayOneShot(dañoSound);
+            Sonido(dañoSound);
+            //audioSource.PlayOneShot(dañoSound);
         }
         else if (other.gameObject.tag == "EnemigoTop")
         {
@@ -310,20 +348,33 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
 
             //TODO animacion o particulas de romper bloque?
+
+            // Sonido al romper el bloque:
+            //! Suena bastante bajo
+            Sonido(ladrilloSound);
+            //audioSource.PlayOneShot(ladrilloSound);
         }
         else if (other.gameObject.tag == "CambiarNivel")
         {
             puntuacion += 100;
             
             // Sonido cambiar de nivel:
-            audioSource.PlayOneShot(cambiarNivelSound);
+            Sonido(cambiarNivelSound);
+            //audioSource.PlayOneShot(cambiarNivelSound);
 
-            Esperar(1.0f);
-            
             //TODO se ha de pasar puntuacion, tamaño, salud y vidas al siguiente nivel, singleton?
+            //layerPrefs.SetInt("salud", salud);
+            //PlayerPrefs.Save();
+
+            //Esperar(2.0f);
 
             SceneManager.LoadScene(escena);
         }
+    }
+
+    public void Sonido(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
     IEnumerator Esperar(float tiempo)

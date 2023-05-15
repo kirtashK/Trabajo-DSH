@@ -19,7 +19,7 @@ public class Patrulla : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Obtener el script del jugador:
+        // Obtener el script detectarJugador:
         detectarJugador = GetComponent<DetectarJugador>();
     }
 
@@ -27,7 +27,7 @@ public class Patrulla : MonoBehaviour
     void Update()
     {
         // Si no esta alerta, patrulla:
-        if (!detectarJugador.alerta)
+        if (!detectarJugador.alerta && waypoints.Length > 0)
         {
             Transform wp = waypoints[indice];
             if (Vector3.Distance(transform.position, wp.position) < 0.01f)
