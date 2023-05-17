@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432924740758087471}
   m_LocalRotation: {x: 0.16647644, y: -0.000000033932547, z: 0.0000000057289147, w: 0.9860454}
-  m_LocalPosition: {x: 11.5, y: 4.25, z: -8.5}
+  m_LocalPosition: {x: 0, y: 4, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -267,9 +267,10 @@ MonoBehaviour:
   derrotaSound: {fileID: 8300000, guid: b1fddf464cb546d4183de594bfffad43, type: 3}
   cambiarNivelSound: {fileID: 8300000, guid: 584215abae516dd4f91aab07e07b6ecb, type: 3}
   playerModels:
-  - {fileID: 5103396058554394525, guid: d3d42458de199fe4da0977f7ef5ec081, type: 3}
-  - {fileID: 3377287950489106181, guid: dfae3ed01faedc74ca1e7f3fad81d6fc, type: 3}
+  - {fileID: 2219782223850850489}
+  - {fileID: 9033179734582691003}
   bolaFuegoPrefab: {fileID: 386489262205570324, guid: 121afa29db4a27d42adf042d747bca69, type: 3}
+  bolaFuegoSpeed: 10
 --- !u!82 &7703346221079960394
 AudioSource:
   m_ObjectHideFlags: 0
@@ -432,6 +433,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2708169517123268031, guid: dfae3ed01faedc74ca1e7f3fad81d6fc, type: 3}
   m_PrefabInstance: {fileID: 6017587988195914686}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9033179734582691003 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3377287950489106181, guid: dfae3ed01faedc74ca1e7f3fad81d6fc, type: 3}
+  m_PrefabInstance: {fileID: 6017587988195914686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6349133772161036068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -442,6 +448,10 @@ PrefabInstance:
     - target: {fileID: 5103396058554394525, guid: d3d42458de199fe4da0977f7ef5ec081, type: 3}
       propertyPath: m_Name
       value: Mario
+      objectReference: {fileID: 0}
+    - target: {fileID: 5103396058554394525, guid: d3d42458de199fe4da0977f7ef5ec081, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5591560892894625063, guid: d3d42458de199fe4da0977f7ef5ec081, type: 3}
       propertyPath: m_RootOrder
@@ -494,3 +504,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5591560892894625063, guid: d3d42458de199fe4da0977f7ef5ec081, type: 3}
   m_PrefabInstance: {fileID: 6349133772161036068}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2219782223850850489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5103396058554394525, guid: d3d42458de199fe4da0977f7ef5ec081, type: 3}
+  m_PrefabInstance: {fileID: 6349133772161036068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &794090784
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219782223850850489}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: def0c9628998fd240a579e59fe9552b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6c3cff9dffa6b00468ee8c05cdd21fbc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

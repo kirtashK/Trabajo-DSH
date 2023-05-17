@@ -127,10 +127,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
-        // Obtener la salud del jugador
-        //int salud = PlayerPrefs.GetInt("salud");
-
     }
 
     // Update is called once per frame
@@ -225,7 +221,7 @@ public class PlayerController : MonoBehaviour
 
             tiempoUltimoDisparo += Time.deltaTime;
             // Código para comprobar si se ha pulsado keybinding para disparar y ha pasado mas de 0.5f desde el ultimo disparo:
-            if (disparo && tiempoUltimoDisparo >= 0.5f)
+            if (disparo && tiempoUltimoDisparo >= 1f)
             {
                 disparo = false;
                 tiempoUltimoDisparo = 0.0f;
@@ -292,6 +288,57 @@ public class PlayerController : MonoBehaviour
         jugador.Saltar.performed += _ => OnJumpPressed();
         // Disparar bola de fuego:
         jugador.Disparar.performed += _ => OnDisparoPressed();
+
+        //* Recoger valores entre escenas
+        // Comprobamos si el valor existe en PlayerPrefs, si existe, lo recogemos, sino, lo ponemos a su valor por defecto:
+        if (PlayerPrefs.HasKey("vidas"))
+        {
+            vidas = PlayerPrefs.GetInt("vidas");
+        }
+        else
+        {
+            vidas = 3;
+            PlayerPrefs.SetInt("vidas", vidas);
+        }
+
+        if (PlayerPrefs.HasKey("salud"))
+        {
+            salud = PlayerPrefs.GetInt("salud");
+
+            if (salud == 3)
+            {
+                // Desactivar el modelo normal
+                playerModels[0].SetActive(false);
+
+                // Activar el modelo de fuego
+                playerModels[1].SetActive(true);
+            }
+        }
+        else
+        {
+            salud = 2;
+            PlayerPrefs.SetInt("salud", salud);
+        }
+
+        if (PlayerPrefs.HasKey("puntuacion"))
+        {
+            puntuacion = PlayerPrefs.GetInt("puntuacion");
+        }
+        else
+        {
+            puntuacion = 0;
+            PlayerPrefs.SetInt("puntuacion", puntuacion);
+        }
+
+        if (PlayerPrefs.HasKey("monedas"))
+        {
+            monedas = PlayerPrefs.GetInt("monedas");
+        }
+        else
+        {
+            monedas = 0;
+            PlayerPrefs.SetInt("monedas", monedas);
+        }
     }
 
     void OnEnable()
@@ -340,10 +387,10 @@ public class PlayerController : MonoBehaviour
             // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
             if (salud == 2)
             {
-                // Desactivar el modelo normal
+                // Desactivar el modelo de fuego
                 playerModels[1].SetActive(false);
 
-                // Activar el modelo de fuego
+                // Activar el modelo normal
                 playerModels[0].SetActive(true);
             }
             else if (salud == 1)
@@ -381,9 +428,12 @@ public class PlayerController : MonoBehaviour
             Sonido(cambiarNivelSound);
             //audioSource.PlayOneShot(cambiarNivelSound);
 
-            //TODO se ha de pasar puntuacion, tamaño, salud y vidas al siguiente nivel, singleton?
-            //layerPrefs.SetInt("salud", salud);
-            //PlayerPrefs.Save();
+            // Se ha de pasar puntuacion, monedas, tamaño (o hacer if en start), salud y vidas al siguiente nivel
+            PlayerPrefs.SetInt("vidas", vidas);
+            PlayerPrefs.SetInt("salud", salud);
+            PlayerPrefs.SetInt("puntuacion", puntuacion);
+            PlayerPrefs.SetInt("monedas", monedas);
+            PlayerPrefs.Save();
 
             //Esperar(2.0f);
 

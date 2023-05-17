@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1456,31 +1456,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &794090782 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2219782223850850489, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-  m_PrefabInstance: {fileID: 3462180247870757318}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &794090784
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 794090782}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: def0c9628998fd240a579e59fe9552b7, type: 2}
-  m_Controller: {fileID: 9100000, guid: 6c3cff9dffa6b00468ee8c05cdd21fbc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &888441274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,7 +1977,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099947429}
-  m_LocalRotation: {x: 0.18438455, y: -0.0000000035649155, z: 6.687826e-10, w: 0.9828542}
+  m_LocalRotation: {x: 0.18438454, y: 0.000000028301818, z: -0.0000000053094524, w: 0.9828542}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2664,11 +2639,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1660428525 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9033179734582691003, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-  m_PrefabInstance: {fileID: 3462180247870757318}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1782035722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8887812805909180373, guid: 4faf7d638fcd75d4b920b2254c36da43, type: 3}
@@ -3475,37 +3445,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 342966701}
     - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: ladrilloSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 754895b10b67616488d76dedecaf5282, type: 3}
-    - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
       propertyPath: TextPuntuacion
       value: 
       objectReference: {fileID: 899851077}
-    - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: playerModels.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: playerModels.Array.data[0]
-      value: 
-      objectReference: {fileID: 794090782}
-    - target: {fileID: 6395209196599142160, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: playerModels.Array.data[1]
-      value: 
-      objectReference: {fileID: 1660428525}
-    - target: {fileID: 6872760018694107527, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6872760018694107527, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6872760018694107527, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9
-      objectReference: {fileID: 0}
     - target: {fileID: 6872760018694107527, guid: b60c3b4bd1455c2468fa3288e3001b69, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.000000033932547
