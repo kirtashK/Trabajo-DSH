@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432924740758087471}
   m_LocalRotation: {x: 0.16647644, y: -0.000000033932547, z: 0.0000000057289147, w: 0.9860454}
-  m_LocalPosition: {x: 0, y: 4, z: -9}
+  m_LocalPosition: {x: 11.5, y: 4.25, z: -8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -256,9 +256,6 @@ MonoBehaviour:
   cam: {fileID: 5839003810152575574}
   spawn: {fileID: 0}
   puntoCaida: {fileID: 0}
-  fuerzaEmpuje: 10
-  duracionEmpuje: 0.2
-  tiempoEspera: 0.5
   escena: Nivel1
   saltoSound: {fileID: 8300000, guid: ed7f1e853b60bcc4aa56a29495ba2f06, type: 3}
   "da\xF1oSound": {fileID: 8300000, guid: fb1c9101da778e4419d13907728d30ac, type: 3}

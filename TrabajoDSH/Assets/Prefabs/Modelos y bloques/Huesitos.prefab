@@ -285,6 +285,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   player: {fileID: 0}
+  alerta: 0
 --- !u!195 &-7431567418138400443
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -474,7 +475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871458285617366082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.035714284, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1403,6 +1404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 112248502446724781}
   - component: {fileID: 3788385329366227080}
+  - component: {fileID: 6591801680603941754}
   m_Layer: 0
   m_Name: Object01
   m_TagString: Untagged
@@ -1524,6 +1526,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00104478, y: 0.06143541, z: 0.040752497}
     m_Extent: {x: 0.09872405, y: 0.19828156, z: 0.12606527}
   m_DirtyAABB: 0
+--- !u!64 &6591801680603941754
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6290243542385546395}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &6376983593284407958
 GameObject:
   m_ObjectHideFlags: 0
