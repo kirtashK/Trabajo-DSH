@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     int vidas = 3;
     // Booleano para saber si el jugador esta vivo o no, muerto = salud && vidas == 0:
     bool estaVivo = true;
+    bool dañado = false;
+    float tiempoUltimoDaño = 0.0f;
 
     // Puntuación del jugador:
     int puntuacion = 0;
@@ -66,10 +68,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform puntoCaida;
 
     //TODO Empujar el jugador al recibir daño, ahora mismo no funciona
+    /*
     [SerializeField] float fuerzaEmpuje = 10f;
     [SerializeField] float duracionEmpuje = 0.2f;
     [SerializeField] float tiempoEspera = 0.5f;
     bool empujando = false;
+    */
 
     // Nombre de la siguiente escena a cargar al ganar el nivel:
     [Tooltip("Nombre de la siguiente escena a cargar cuando el jugador entra en la tuberia al final del mapa")]
@@ -135,6 +139,7 @@ public class PlayerController : MonoBehaviour
         //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
 
         //* #### Movimiento ####
+        #region Movimiento
 
         // Creamos una esfera invisible que compruebe si toca suelo con layer = Suelo, si toca suelo, isGrounded = True:
         /*float halfHeight = controller.height * 0.5f;
@@ -181,14 +186,19 @@ public class PlayerController : MonoBehaviour
             controller.Move(verticalVel * Time.deltaTime);
         }
 
+        #endregion
         //* #### Fin movimiento ####
 
         // Salud y vidas:
-        if (salud == 0 && vidas > 0)
+        if (salud == 0 && vidas > 0 && estaVivo)
         {
+            estaVivo = false;
+
             // Mover el jugador a la posicion de spawn
-            //! No funciona por algun motivo, pero con caida si funciona...
             transform.position = spawn.position;
+
+            // Asegurar que el jugador no se puede mover mientras respawnea, sino, a veces no se teletransporta bien.
+            StartCoroutine(RespawnWait(0.2f));
 
             salud = 2;
             vidas--;
@@ -204,9 +214,8 @@ public class PlayerController : MonoBehaviour
             Sonido(derrotaSound);
             //audioSource.PlayOneShot(derrotaSound);
 
-            //Esperar(2.0f);
-
-            //TODO Has perdido, cargar escena de derrota
+            // Has perdido, cargar escena de derrota
+            SceneManager.LoadScene("Derrota");
         }
 
         //Flor de Fuego, solo cuando salud == 3, el jugador puede disparar bolas de fuego y su modelo cambia:
@@ -231,6 +240,12 @@ public class PlayerController : MonoBehaviour
                 Rigidbody rb = fireball.GetComponent<Rigidbody>();
                 rb.velocity = transform.forward * bolaFuegoSpeed;
             }
+        }
+
+        tiempoUltimoDaño += Time.deltaTime;
+        if (dañado && tiempoUltimoDaño >= 1.0f)
+        {
+            dañado = false;
         }
 
         // Arreglar la puntuación para que no sea menor que 0, para evitar mostrar puntuacion: -10
@@ -364,12 +379,17 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Si tocamos el lado de un enemigo, perdemos vida, si tocamos su cabeza, le matamos
-        if (other.gameObject.tag == "EnemigoLado")
+        if (other.gameObject.tag == "EnemigoLado" && !dañado)
         {
+            //TODO Si recibe daño, no puede dañar ni recibir mas daño durante x tiempo
+            dañado = true;
+            tiempoUltimoDaño = 0.0f;
+
             salud -= 1;
             puntuacion -= 50;
 
             //TODO Al chocarse con un enemigo de lado, empujar al jugador o al enemigo
+            
             /*
             if (!empujando)
             {
@@ -382,6 +402,13 @@ public class PlayerController : MonoBehaviour
                 Vector3 direccionEmpuje = (transform.position - other.transform.position).normalized;
                 rb.AddForce(direccionEmpuje * fuerzaEmpuje, ForceMode.Impulse);
             }
+            float pushForce = 10.0f;
+            // Get the direction from the enemy to the player
+            Vector3 pushDirection = transform.position - other.transform.position;
+            pushDirection.Normalize();
+
+            // Push the player by moving its Transform in the opposite direction
+            transform.Translate(-pushDirection * pushForce, Space.World);
             */
 
             // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
@@ -399,12 +426,11 @@ public class PlayerController : MonoBehaviour
                 CambiarTamaño(false);
             }
             
-
             // Sonido daño:
             Sonido(dañoSound);
             //audioSource.PlayOneShot(dañoSound);
         }
-        else if (other.gameObject.tag == "EnemigoTop")
+        else if (other.gameObject.tag == "EnemigoTop" && !dañado)
         {
             puntuacion += 25;
             Destroy(other.transform.parent.gameObject);
@@ -446,11 +472,15 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
-    IEnumerator Esperar(float tiempo)
+    // El jugador no se puede mover hasta que acabe la corutina
+    IEnumerator RespawnWait(float tiempo)
     {
         yield return new WaitForSeconds(tiempo);
+        estaVivo = true;
+        yield return null;
     }
 
+    /*
     IEnumerator Empujar(GameObject enemigo)
     {
         empujando = true;
@@ -466,10 +496,12 @@ public class PlayerController : MonoBehaviour
         }
         yield return new WaitForSeconds(tiempoEspera);
         empujando = false;
-    }
+        yield return null;
+    }*/
 
     public void CambiarTamaño(bool aumentar)
     {
+        //! A veces cambia de tamaño mas o menos de la cuenta...
         // Velocidad de disminución de la escala
         float velocidadDisminucion = 1f;
 
@@ -481,7 +513,7 @@ public class PlayerController : MonoBehaviour
         {
             // Multiplicar la escala actual del jugador por dos
             nuevaEscala = transform.localScale * 2.0f;
-
+            
             // Sonido crecer:
             audioSource.PlayOneShot(crecerSound);
         }
