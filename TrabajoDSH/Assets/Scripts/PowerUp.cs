@@ -68,7 +68,6 @@ public class PowerUp : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, forwardDirection, out hit, raycastDistance))
             {
-                // Check if the collider hit has a tag that should be ignored for reflection
                 if (reflectionIgnoreTags == null || Array.IndexOf(reflectionIgnoreTags, hit.collider.tag) == -1)
                 {
                     // cambiar la direccion del powerUp al chocarse

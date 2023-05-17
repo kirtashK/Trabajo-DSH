@@ -44,6 +44,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Disparar"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f6abed9-110b-44be-af7f-037bdf5aff95"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -244,6 +253,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Saltar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63641659-58d7-4a5e-8b39-04caea65ac1b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Disparar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86cf6a8b-4b15-4d9d-a2dd-f81493d373f0"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Disparar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceb2928c-ec80-4bb6-98c4-20d5b58d7d1c"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Disparar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -254,6 +296,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Jugador = asset.FindActionMap("Jugador", throwIfNotFound: true);
         m_Jugador_Movimiento = m_Jugador.FindAction("Movimiento", throwIfNotFound: true);
         m_Jugador_Saltar = m_Jugador.FindAction("Saltar", throwIfNotFound: true);
+        m_Jugador_Disparar = m_Jugador.FindAction("Disparar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,12 +358,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IJugadorActions m_JugadorActionsCallbackInterface;
     private readonly InputAction m_Jugador_Movimiento;
     private readonly InputAction m_Jugador_Saltar;
+    private readonly InputAction m_Jugador_Disparar;
     public struct JugadorActions
     {
         private @Controls m_Wrapper;
         public JugadorActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movimiento => m_Wrapper.m_Jugador_Movimiento;
         public InputAction @Saltar => m_Wrapper.m_Jugador_Saltar;
+        public InputAction @Disparar => m_Wrapper.m_Jugador_Disparar;
         public InputActionMap Get() { return m_Wrapper.m_Jugador; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,6 +381,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Saltar.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSaltar;
                 @Saltar.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSaltar;
                 @Saltar.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSaltar;
+                @Disparar.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnDisparar;
+                @Disparar.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnDisparar;
+                @Disparar.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnDisparar;
             }
             m_Wrapper.m_JugadorActionsCallbackInterface = instance;
             if (instance != null)
@@ -346,6 +394,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Saltar.started += instance.OnSaltar;
                 @Saltar.performed += instance.OnSaltar;
                 @Saltar.canceled += instance.OnSaltar;
+                @Disparar.started += instance.OnDisparar;
+                @Disparar.performed += instance.OnDisparar;
+                @Disparar.canceled += instance.OnDisparar;
             }
         }
     }
@@ -354,5 +405,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnMovimiento(InputAction.CallbackContext context);
         void OnSaltar(InputAction.CallbackContext context);
+        void OnDisparar(InputAction.CallbackContext context);
     }
 }

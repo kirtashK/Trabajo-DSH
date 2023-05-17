@@ -10,18 +10,21 @@ public class MovimientoJugador : MonoBehaviour
     bool pulsandoMoverse;
     bool pulsandoCorrer;
     bool pulsandoSaltar;
+
     // Start is called before the first frame update
-    private void Awake() {
+    private void Awake() 
+    {
         input = new InputMario();
-        input.actionMovimiento.andar.performed += ctx =>{
+        input.actionMovimiento.andar.performed += ctx =>
+        {
             currentMovement = ctx.ReadValue<Vector2>();
             pulsandoMoverse = currentMovement.x !=0 || currentMovement.y != 0;
         };
 
-    input.actionMovimiento.corre.performed += ctx => pulsandoCorrer=ctx.ReadValueAsButton();
-    input.actionMovimiento.salto.performed += ctx => pulsandoSaltar=ctx.ReadValueAsButton();
-
+        input.actionMovimiento.corre.performed += ctx => pulsandoCorrer=ctx.ReadValueAsButton();
+        input.actionMovimiento.salto.performed += ctx => pulsandoSaltar=ctx.ReadValueAsButton();
     }
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -34,17 +37,16 @@ public class MovimientoJugador : MonoBehaviour
         handRotate();
     }
 
-
     void handMovement(){
         bool isWalking = animator.GetBool("isWalking");
         bool isRunning = animator.GetBool("isRunning");
         bool isJumping = animator.GetBool("isJumping");
-        Debug.Log(isWalking);
+        //Debug.Log(isWalking);
         if( pulsandoMoverse){
             animator.SetBool("isWalking",true);
         }
         if( !pulsandoMoverse){
-             animator.SetBool("isWalking",false);
+            animator.SetBool("isWalking",false);
         }
         if(!isJumping && pulsandoSaltar){
             animator.SetBool("isJumping",true);
@@ -52,30 +54,29 @@ public class MovimientoJugador : MonoBehaviour
         if(!pulsandoSaltar){
             animator.SetBool("isJumping",false);
         }
-
         if(isWalking && pulsandoCorrer && !isRunning){
-             animator.SetBool("isRunning",true);
+            animator.SetBool("isRunning",true);
         }
-         if(isRunning && !pulsandoCorrer){
-             animator.SetBool("isRunning",false);
+        if(isRunning && !pulsandoCorrer){
+            animator.SetBool("isRunning",false);
         }
 
     }
 
-    void handRotate(){
+    void handRotate()
+    {
         Vector3 currentposition = transform.position;
-
         Vector3 newPosition = new Vector3(currentMovement.x,0,currentMovement.y);
         Vector3 nuevaDireccion = currentposition + newPosition;
         transform.LookAt(nuevaDireccion);
-
     }
 
-    void OnEnable() {
-     input.actionMovimiento.Enable();   
+    void OnEnable()
+    {
+        input.actionMovimiento.Enable();   
     }
-    void OnDisable() {
-       input.actionMovimiento.Disable();    
+    void OnDisable()
+    {
+        input.actionMovimiento.Disable();    
     }
-
 }

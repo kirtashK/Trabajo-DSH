@@ -3,7 +3,22 @@ guid: a08559edcb50ab645a9c8022c0defb55
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - TextSalud: {instanceID: 0}
+  - TextVidas: {instanceID: 0}
+  - TextPuntuacion: {instanceID: 0}
+  - TextMonedas: {instanceID: 0}
+  - controller: {instanceID: 0}
+  - cam: {instanceID: 0}
+  - spawn: {instanceID: 0}
+  - puntoCaida: {instanceID: 0}
+  - saltoSound: {instanceID: 0}
+  - "da\xF1oSound": {instanceID: 0}
+  - crecerSound: {instanceID: 0}
+  - ladrilloSound: {instanceID: 0}
+  - derrotaSound: {instanceID: 0}
+  - cambiarNivelSound: {instanceID: 0}
+  - bolaFuegoPrefab: {fileID: 386489262205570324, guid: 121afa29db4a27d42adf042d747bca69, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

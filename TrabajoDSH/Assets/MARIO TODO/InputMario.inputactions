@@ -66,6 +66,17 @@
                     "action": "salto",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "864a24ce-8d55-4297-80a0-ddf74d1eebe1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "salto",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

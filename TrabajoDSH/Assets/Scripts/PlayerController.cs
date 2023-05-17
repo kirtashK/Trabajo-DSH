@@ -87,6 +87,13 @@ public class PlayerController : MonoBehaviour
     // Modelos del jugador, normal y fuego:
     public GameObject[] playerModels;
 
+    // Disparar bola de fuego:
+    bool disparo = false;
+    [Tooltip("Prefab a disparar con la flor de fuego")]
+    [SerializeField] GameObject bolaFuegoPrefab;
+    [SerializeField] float bolaFuegoSpeed = 10f;
+    float tiempoUltimoDisparo = 0.0f;
+
     #endregion
 
     // Propiedad para modificar/devolver atributos privados:
@@ -216,12 +223,18 @@ public class PlayerController : MonoBehaviour
             // Activar el modelo de fuego
             playerModels[1].SetActive(true);
 
-            // Código para comprobar si se ha pulsado keybinding para disparar
+            tiempoUltimoDisparo += Time.deltaTime;
+            // Código para comprobar si se ha pulsado keybinding para disparar y ha pasado mas de 0.5f desde el ultimo disparo:
+            if (disparo && tiempoUltimoDisparo >= 0.5f)
+            {
+                disparo = false;
+                tiempoUltimoDisparo = 0.0f;
 
-            // Disparar la bola de fuego, que se borre al cabo de x tiempo
-
-            // Si la bola de fuego da a un enemigo, eliminarlo o hacerle daño, script en la bola que compruebe el tag
-
+                // Disparar la bola de fuego y aplicarle movimiento:
+                GameObject fireball = Instantiate(bolaFuegoPrefab, transform.position, transform.rotation);
+                Rigidbody rb = fireball.GetComponent<Rigidbody>();
+                rb.velocity = transform.forward * bolaFuegoSpeed;
+            }
         }
 
         // Arreglar la puntuación para que no sea menor que 0, para evitar mostrar puntuacion: -10
@@ -277,7 +290,8 @@ public class PlayerController : MonoBehaviour
         jugador.Movimiento.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         // Saltar, llama a la funcion OnJumpPressed, que asigna jump a true:
         jugador.Saltar.performed += _ => OnJumpPressed();
-        //TODO! Disparar bola de fuego:
+        // Disparar bola de fuego:
+        jugador.Disparar.performed += _ => OnDisparoPressed();
     }
 
     void OnEnable()
@@ -293,6 +307,11 @@ public class PlayerController : MonoBehaviour
     void OnJumpPressed()
     {
         jump = true;
+    }
+
+    void OnDisparoPressed()
+    {
+        disparo = true;
     }
 
     void OnTriggerEnter(Collider other)
