@@ -67,14 +67,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Posición donde el jugador será movido a spawn al caer debajo de la posicion Y de puntoCaida")]
     [SerializeField] Transform puntoCaida;
 
-    //TODO Empujar el jugador al recibir daño, ahora mismo no funciona
-    /*
-    [SerializeField] float fuerzaEmpuje = 10f;
-    [SerializeField] float duracionEmpuje = 0.2f;
-    [SerializeField] float tiempoEspera = 0.5f;
-    bool empujando = false;
-    */
-
     // Nombre de la siguiente escena a cargar al ganar el nivel:
     [Tooltip("Nombre de la siguiente escena a cargar cuando el jugador entra en la tuberia al final del mapa")]
     [SerializeField] string escena;
@@ -381,7 +373,7 @@ public class PlayerController : MonoBehaviour
         // Si tocamos el lado de un enemigo, perdemos vida, si tocamos su cabeza, le matamos
         if (other.gameObject.tag == "EnemigoLado" && !dañado)
         {
-            //TODO Si recibe daño, no puede dañar ni recibir mas daño durante x tiempo
+            // Si recibe daño, no puede dañar ni recibir mas daño durante x tiempo
             dañado = true;
             tiempoUltimoDaño = 0.0f;
 
@@ -389,27 +381,6 @@ public class PlayerController : MonoBehaviour
             puntuacion -= 50;
 
             //TODO Al chocarse con un enemigo de lado, empujar al jugador o al enemigo
-            
-            /*
-            if (!empujando)
-            {
-                StartCoroutine(Empujar(other.gameObject));
-            }
-            
-            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                Vector3 direccionEmpuje = (transform.position - other.transform.position).normalized;
-                rb.AddForce(direccionEmpuje * fuerzaEmpuje, ForceMode.Impulse);
-            }
-            float pushForce = 10.0f;
-            // Get the direction from the enemy to the player
-            Vector3 pushDirection = transform.position - other.transform.position;
-            pushDirection.Normalize();
-
-            // Push the player by moving its Transform in the opposite direction
-            transform.Translate(-pushDirection * pushForce, Space.World);
-            */
 
             // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
             if (salud == 2)
@@ -479,25 +450,6 @@ public class PlayerController : MonoBehaviour
         estaVivo = true;
         yield return null;
     }
-
-    /*
-    IEnumerator Empujar(GameObject enemigo)
-    {
-        empujando = true;
-        Vector3 direccionEmpuje = (enemigo.transform.position - transform.position).normalized;
-        Vector3 fuerza = direccionEmpuje * fuerzaEmpuje;
-        float tiempoInicio = Time.time;
-
-        while (Time.time < tiempoInicio + duracionEmpuje)
-        {
-            enemigo.transform.Translate(fuerza * Time.deltaTime, Space.World);
-            Debug.Log("El jugador ha sido empujado.");
-            yield return null;
-        }
-        yield return new WaitForSeconds(tiempoEspera);
-        empujando = false;
-        yield return null;
-    }*/
 
     public void CambiarTamaño(bool aumentar)
     {
