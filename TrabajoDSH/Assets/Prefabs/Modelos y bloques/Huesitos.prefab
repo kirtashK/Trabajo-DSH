@@ -263,9 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bcc17bf851a264087e63c3d8885e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  waypoints: []
   velocidad: 2
 --- !u!114 &4953838330070055972
 MonoBehaviour:
@@ -279,11 +277,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005b84192a68bf44d89ddb82df60670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 0
-  Rango: 0
+  velocidad: 5
+  Rango: 10
   capaJugador:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   player: {fileID: 0}
   alerta: 0
 --- !u!195 &-7431567418138400443
@@ -448,8 +446,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17038439, y: 0.3463098, z: 0.24023029}
-  m_Center: {x: -0.006728556, y: 0.16863258, z: 0.03719919}
+  m_Size: {x: 0.18310817, y: 0.3463098, z: 0.3250476}
+  m_Center: {x: -0.006728556, y: 0.16863258, z: 0.047293995}
 --- !u!1 &1871458285617366082
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +491,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.14513166, y: 0.036737375, z: 0.13142073}
+  m_Size: {x: 0.16967733, y: 0.036737375, z: 0.15237255}
   m_Center: {x: 0.0024040109, y: 0.3637764, z: 0.070350155}
 --- !u!1 &2010825480666238319
 GameObject:
@@ -1535,7 +1533,7 @@ MeshCollider:
   m_GameObject: {fileID: 6290243542385546395}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30

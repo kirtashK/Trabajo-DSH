@@ -31,7 +31,10 @@ public class BolaDeFuego : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    void OnCollisionEnter(Collision other)
+    {
         // Borrar la bola de fuego si se choca con un obstaculo
         RaycastHit hit;
         if (Physics.Raycast(transform.position, gameObject.transform.forward, out hit, raycastDistance))
@@ -48,7 +51,8 @@ public class BolaDeFuego : MonoBehaviour
         // Si da a un enemigo, matarlo:
         if (other.gameObject.tag == "EnemigoLado" || other.gameObject.tag == "EnemigoTop")
         {
-            Destroy(other.gameObject);
+            Destroy(other.transform.parent.gameObject);
+            Destroy(gameObject);
         }
     }
 }

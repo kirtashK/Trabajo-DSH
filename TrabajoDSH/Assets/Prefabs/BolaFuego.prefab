@@ -108,14 +108,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 386489262205570324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8635e12ebf212804aa48d3ac11f3254d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f9d80587bb047341b4d422682657402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   reflectionIgnoreTags:
   - Player
-  - VidaExtra
   - Moneda
   - PowerUp
+  - VidaExtra
   - FlorDeFuego
 --- !u!54 &2189402177416316292
 Rigidbody:

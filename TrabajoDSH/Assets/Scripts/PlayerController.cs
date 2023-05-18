@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Velocidad del jugador")]
     [Range(1.0f, 30.0f)]
     [SerializeField] float velocidad = 11.0f;
+    public Vector3 horizontalVel;
 
     // Movimiento vertical:
     [Tooltip("Gravedad del jugador")]
@@ -34,13 +35,13 @@ public class PlayerController : MonoBehaviour
     Vector3 verticalVel = Vector3.zero;
     [Tooltip("Layer que el script detecta como suelo para poder saltar")]
     [SerializeField] LayerMask groundMask;
-    bool isGrounded;
+    public bool isGrounded;
 
     // Salto:
     [Tooltip("Altura del salto que realiza el jugador")]
     [Range(1.0f, 10.0f)]
     [SerializeField] float alturaSalto = 3.5f;
-    bool jump;
+    public bool jump;
 
     // Camara que sigue al jugador:
     [Tooltip("Camara asignada al jugador")]
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
     // Vidas del jugador, no es lo mismo que salud, si la salud llega a 0, se reduce una vida y salud = 2:
     int vidas = 3;
     // Booleano para saber si el jugador esta vivo o no, muerto = salud && vidas == 0:
-    bool estaVivo = true;
+    public bool estaVivo = true;
     bool dañado = false;
     float tiempoUltimoDaño = 0.0f;
 
@@ -152,8 +153,15 @@ public class PlayerController : MonoBehaviour
         // Mover el jugador horizontalmente:
         if (estaVivo)
         {
-            Vector3 horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
+            horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
             horizontalVel.y = 0;
+
+            // Limitar la velocidad máxima
+            if (horizontalVel.magnitude > velocidad)
+            {
+                horizontalVel = horizontalVel.normalized * velocidad;
+            }
+
             controller.Move(horizontalVel * Time.deltaTime);
         }
 
@@ -166,7 +174,6 @@ public class PlayerController : MonoBehaviour
 
                 // Sonido salto:
                 Sonido(saltoSound);
-                //audioSource.PlayOneShot(saltoSound);
             }
             jump = false;
         }
@@ -204,7 +211,6 @@ public class PlayerController : MonoBehaviour
 
             // Sonido derrota:
             Sonido(derrotaSound);
-            //audioSource.PlayOneShot(derrotaSound);
 
             // Has perdido, cargar escena de derrota
             SceneManager.LoadScene("Derrota");
@@ -277,7 +283,6 @@ public class PlayerController : MonoBehaviour
 
             // Sonido daño:
             Sonido(dañoSound);
-            //audioSource.PlayOneShot(dañoSound);
         }
     }
 
@@ -319,6 +324,10 @@ public class PlayerController : MonoBehaviour
 
                 // Activar el modelo de fuego
                 playerModels[1].SetActive(true);
+            }
+            else if (salud == 1)
+            {
+                CambiarTamaño(false);
             }
         }
         else
@@ -371,6 +380,14 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Si tocamos el lado de un enemigo, perdemos vida, si tocamos su cabeza, le matamos
+        if (other.gameObject.tag == "EnemigoLado")
+        {
+            // Al chocarse con un enemigo de lado, empujar al jugador
+            Vector3 direccion = transform.position - other.transform.position;
+            Vector3 horizontalVel = direccion * 1.5f;
+            horizontalVel.y = 0;
+            controller.Move(horizontalVel);
+        }
         if (other.gameObject.tag == "EnemigoLado" && !dañado)
         {
             // Si recibe daño, no puede dañar ni recibir mas daño durante x tiempo
@@ -380,7 +397,7 @@ public class PlayerController : MonoBehaviour
             salud -= 1;
             puntuacion -= 50;
 
-            //TODO Al chocarse con un enemigo de lado, empujar al jugador o al enemigo
+            
 
             // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
             if (salud == 2)
@@ -399,7 +416,6 @@ public class PlayerController : MonoBehaviour
             
             // Sonido daño:
             Sonido(dañoSound);
-            //audioSource.PlayOneShot(dañoSound);
         }
         else if (other.gameObject.tag == "EnemigoTop" && !dañado)
         {
@@ -410,29 +426,24 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
 
-            //TODO animacion o particulas de romper bloque?
-
             // Sonido al romper el bloque:
             //! Suena bastante bajo
             Sonido(ladrilloSound);
-            //audioSource.PlayOneShot(ladrilloSound);
         }
         else if (other.gameObject.tag == "CambiarNivel")
         {
             puntuacion += 100;
             
             // Sonido cambiar de nivel:
+            //! no se escucha porque se cambia al siguiente nivel al instante, hacer corutina?
             Sonido(cambiarNivelSound);
-            //audioSource.PlayOneShot(cambiarNivelSound);
 
-            // Se ha de pasar puntuacion, monedas, tamaño (o hacer if en start), salud y vidas al siguiente nivel
+            // Se ha de pasar puntuacion, monedas, salud y vidas al siguiente nivel
             PlayerPrefs.SetInt("vidas", vidas);
             PlayerPrefs.SetInt("salud", salud);
             PlayerPrefs.SetInt("puntuacion", puntuacion);
             PlayerPrefs.SetInt("monedas", monedas);
             PlayerPrefs.Save();
-
-            //Esperar(2.0f);
 
             SceneManager.LoadScene(escena);
         }
@@ -442,6 +453,7 @@ public class PlayerController : MonoBehaviour
     {
         audioSource.PlayOneShot(clip);
     }
+
 
     // El jugador no se puede mover hasta que acabe la corutina
     IEnumerator RespawnWait(float tiempo)
