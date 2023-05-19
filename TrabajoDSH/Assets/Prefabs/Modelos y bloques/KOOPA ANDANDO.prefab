@@ -88,9 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bcc17bf851a264087e63c3d8885e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  waypoints: []
   velocidad: 2
 --- !u!195 &917863402367423936
 NavMeshAgent:

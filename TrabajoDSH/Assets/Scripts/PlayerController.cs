@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         // Mover el jugador horizontalmente:
         if (estaVivo)
         {
-            horizontalVel = (cam.transform.right * horizontalInput.x + cam.transform.forward * horizontalInput.y) * velocidad;
+            horizontalVel = (cam.transform.TransformDirection(Vector3.right) * horizontalInput.x + cam.transform.TransformDirection(Vector3.forward) * horizontalInput.y) * velocidad;
             horizontalVel.y = 0;
 
             // Limitar la velocidad máxima
@@ -163,6 +163,12 @@ public class PlayerController : MonoBehaviour
             }
 
             controller.Move(horizontalVel * Time.deltaTime);
+
+            // Rotar el personaje hacia donde apunta la camara
+            Vector3 targetDirection = cam.transform.TransformDirection(Vector3.forward);
+            targetDirection.y = 0f;
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 45.0f);
         }
 
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
@@ -427,7 +433,6 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
 
             // Sonido al romper el bloque:
-            //! Suena bastante bajo
             Sonido(ladrilloSound);
         }
         else if (other.gameObject.tag == "CambiarNivel")
@@ -435,7 +440,6 @@ public class PlayerController : MonoBehaviour
             puntuacion += 100;
             
             // Sonido cambiar de nivel:
-            //! no se escucha porque se cambia al siguiente nivel al instante, hacer corutina?
             Sonido(cambiarNivelSound);
 
             // Se ha de pasar puntuacion, monedas, salud y vidas al siguiente nivel
@@ -445,7 +449,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("monedas", monedas);
             PlayerPrefs.Save();
 
-            SceneManager.LoadScene(escena);
+            StartCoroutine(CambioNivelWait(1.0f));
         }
     }
 
@@ -454,12 +458,18 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
-
     // El jugador no se puede mover hasta que acabe la corutina
     IEnumerator RespawnWait(float tiempo)
     {
         yield return new WaitForSeconds(tiempo);
         estaVivo = true;
+        yield return null;
+    }
+
+    IEnumerator CambioNivelWait(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        SceneManager.LoadScene(escena);
         yield return null;
     }
 
