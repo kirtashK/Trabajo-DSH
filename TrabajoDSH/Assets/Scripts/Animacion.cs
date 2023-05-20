@@ -78,6 +78,10 @@ public class Animacion : MonoBehaviour
             //Debug.Log("Dejando de saltar...");
             animator.SetBool("isJumping",false);
         }
+        if (isRunning && isWalking && Mathf.Abs(horizontalVel.x) <= velCorrer && Mathf.Abs(horizontalVel.z) <= velCorrer && Mathf.Abs(horizontalVel.x) <= velAndar && Mathf.Abs(horizontalVel.z) <= velAndar){
+            animator.SetBool("isRunning",false);
+            animator.SetBool("isWalking",false);
+        }
     }
         void handRotate()
     {
