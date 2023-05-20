@@ -27,6 +27,7 @@ public class Animacion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Si el modelo esta activado:
         if (gameObject.activeSelf)
         {
             horizontalVel = playerController.horizontalVel;
@@ -41,35 +42,38 @@ public class Animacion : MonoBehaviour
         bool isRunning = animator.GetBool("isRunning");
         bool isJumping = animator.GetBool("isJumping");
 
-        if (Mathf.Abs(horizontalVel.x) > 0.5f || Mathf.Abs(horizontalVel.z) > 0.5f && !isWalking && !isRunning)
+        float velAndar = 0.5f;
+        float velCorrer = 6.0f;
+
+        if (Mathf.Abs(horizontalVel.x) > velAndar || Mathf.Abs(horizontalVel.z) > velAndar && !isWalking && !isRunning)
         {
             //Debug.Log("Andando...");
             animator.SetBool("isWalking",true);
         }
-        if (Mathf.Abs(horizontalVel.x) <= 0.5f && Mathf.Abs(horizontalVel.z) <= 0.5f && isWalking && !isRunning)
+        if (Mathf.Abs(horizontalVel.x) <= velAndar && Mathf.Abs(horizontalVel.z) <= velAndar && isWalking && !isRunning)
         {
-            Debug.Log("Dejando de andar...");
+            //Debug.Log("Dejando de andar...");
             animator.SetBool("isWalking",false);
+        }
+        if (isWalking && !isRunning && (Mathf.Abs(horizontalVel.x) > velCorrer || Mathf.Abs(horizontalVel.z) > velCorrer))
+        {
+            //Debug.Log("Corriendo...");
+            animator.SetBool("isRunning",true);
+        }
+        if (isRunning && isWalking && Mathf.Abs(horizontalVel.x) <= velCorrer && Mathf.Abs(horizontalVel.z) <= velCorrer)
+        {
+            //Debug.Log("Dejando de correr...");
+            animator.SetBool("isRunning",false);
         }
         if (!isJumping && playerController.jump && playerController.isGrounded)
         {
-            Debug.Log("Saltando...");
+            //Debug.Log("Saltando...");
             animator.SetBool("isJumping",true);
         }
         if (isJumping)
         {
-            Debug.Log("Dejando de saltar...");
+            //Debug.Log("Dejando de saltar...");
             animator.SetBool("isJumping",false);
-        }
-        if (isWalking && (Mathf.Abs(horizontalVel.x) > 8 || Mathf.Abs(horizontalVel.z) > 8) && !isRunning)
-        {
-            Debug.Log("Corriendo...");
-            animator.SetBool("isRunning",true);
-        }
-        if (isRunning && isWalking && Mathf.Abs(horizontalVel.x) <= 8 && Mathf.Abs(horizontalVel.z) <= 8)
-        {
-            Debug.Log("Dejando de correr...");
-            animator.SetBool("isRunning",false);
         }
     }
 }

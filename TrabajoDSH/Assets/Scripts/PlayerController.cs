@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     int vidas = 3;
     // Booleano para saber si el jugador esta vivo o no, muerto = salud && vidas == 0:
     public bool estaVivo = true;
+    // Booleanos para saber si el jugador ha sido dañado:
     bool dañado = false;
     float tiempoUltimoDaño = 0.0f;
 
@@ -64,7 +65,6 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("Posición donde se moverá el jugador al perder vida/caer")]
     [SerializeField] Transform spawn;
-
     [Tooltip("Posición donde el jugador será movido a spawn al caer debajo de la posicion Y de puntoCaida")]
     [SerializeField] Transform puntoCaida;
 
@@ -88,10 +88,10 @@ public class PlayerController : MonoBehaviour
     bool disparo = false;
     [Tooltip("Prefab a disparar con la flor de fuego")]
     [SerializeField] GameObject bolaFuegoPrefab;
-    [SerializeField] float bolaFuegoSpeed = 10f;
+    [Tooltip("Velocidad de disparo de la bola de fuego")]
+    [Range(5.0f, 50.0f)]
+    [SerializeField] float bolaFuegoSpeed = 20f;
     float tiempoUltimoDisparo = 0.0f;
-
-    #endregion
 
     // Propiedad para modificar/devolver atributos privados:
     public int Salud
@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
         set{ monedas = value; }
     }
 
+    #endregion
     //* ######## Fin Variables ########
 
     // Start is called before the first frame update
@@ -129,16 +130,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //? El jugador ha de mirar hacia donde se mueve, transform.lookat?
-
         //* #### Movimiento ####
         #region Movimiento
 
-        // Creamos una esfera invisible que compruebe si toca suelo con layer = Suelo, si toca suelo, isGrounded = True:
-        /*float halfHeight = controller.height * 0.5f;
-        Vector3 bottomPoint = transform.TransformPoint(controller.center - Vector3.up * halfHeight);
-        isGrounded = Physics.CheckSphere(bottomPoint, 0.3f, groundMask);
-        */
+        // Creamos un raycast invisible que comprueba si toca suelo con layer = Suelo, si toca suelo, isGrounded = True:
         RaycastHit hit;
         float height = transform.localScale.y * 1.5f;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, height, groundMask);
@@ -148,27 +143,10 @@ public class PlayerController : MonoBehaviour
         {
             verticalVel.y = 0.0f;
         }
-
-
-        // Mover el jugador horizontalmente:
+        // Mover el jugador horizontalmente, si esta vivo:
         if (estaVivo)
         {
-            horizontalVel = (cam.transform.TransformDirection(Vector3.right) * horizontalInput.x + cam.transform.TransformDirection(Vector3.forward) * horizontalInput.y) * velocidad;
-            horizontalVel.y = 0;
-
-            // Limitar la velocidad máxima
-            if (horizontalVel.magnitude > velocidad)
-            {
-                horizontalVel = horizontalVel.normalized * velocidad;
-            }
-
-            controller.Move(horizontalVel * Time.deltaTime);
-
-            // Rotar el personaje hacia donde apunta la camara
-            Vector3 targetDirection = cam.transform.TransformDirection(Vector3.forward);
-            targetDirection.y = 0f;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 45.0f);
+            MoverHor();
         }
 
         // Si se pulsa saltar, si esta en el suelo, salta, sino, jump = false:
@@ -181,7 +159,10 @@ public class PlayerController : MonoBehaviour
                 // Sonido salto:
                 Sonido(saltoSound);
             }
-            jump = false;
+            else
+            {
+                jump = false;
+            }
         }
 
         // Mover el jugador verticalmente:
@@ -233,19 +214,15 @@ public class PlayerController : MonoBehaviour
             playerModels[1].SetActive(true);
 
             tiempoUltimoDisparo += Time.deltaTime;
-            // Código para comprobar si se ha pulsado keybinding para disparar y ha pasado mas de 0.5f desde el ultimo disparo:
+            // Comprobar si se ha pulsado keybinding para disparar y ha pasado mas de x segundos desde el ultimo disparo:
             if (disparo && tiempoUltimoDisparo >= 1f)
             {
-                disparo = false;
-                tiempoUltimoDisparo = 0.0f;
-
                 // Disparar la bola de fuego y aplicarle movimiento:
-                GameObject fireball = Instantiate(bolaFuegoPrefab, transform.position, transform.rotation);
-                Rigidbody rb = fireball.GetComponent<Rigidbody>();
-                rb.velocity = transform.forward * bolaFuegoSpeed;
+                DispararBolaFuego();                
             }
         }
 
+        // Reiniciar booleano dañado al cabo de x segundos después de recibir daño:
         tiempoUltimoDaño += Time.deltaTime;
         if (dañado && tiempoUltimoDaño >= 1.0f)
         {
@@ -308,6 +285,142 @@ public class PlayerController : MonoBehaviour
         jugador.Disparar.performed += _ => OnDisparoPressed();
 
         //* Recoger valores entre escenas
+        ObtenerInfo();
+    }
+
+    void OnEnable()
+    {
+        control.Enable();
+    }
+
+    void OnDestroy()
+    {
+        control.Disable();
+    }
+
+    void OnJumpPressed()
+    {
+        jump = true;
+    }
+
+    void OnDisparoPressed()
+    {
+        disparo = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Si tocamos el lado de un enemigo, perdemos vida, si tocamos su cabeza, le matamos
+        if (other.gameObject.tag == "EnemigoLado")
+        {
+            // Al chocarse con un enemigo de lado, empujar al jugador
+            Vector3 direccion = transform.position - other.transform.position;
+            Vector3 horizontalVel = direccion * 1.5f;
+            horizontalVel.y = 0;
+            controller.Move(horizontalVel);
+        }
+        if (other.gameObject.tag == "EnemigoLado" && !dañado)
+        {
+            // Si recibe daño, no puede dañar ni recibir mas daño durante x tiempo
+            dañado = true;
+            tiempoUltimoDaño = 0.0f;
+
+            salud -= 1;
+            puntuacion -= 50;
+
+            // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
+            if (salud == 2)
+            {
+                // Desactivar el modelo de fuego
+                playerModels[1].SetActive(false);
+
+                // Activar el modelo normal
+                playerModels[0].SetActive(true);
+            }
+            else if (salud == 1)
+            {
+                // Reducir tamaño
+                CambiarTamaño(false);
+            }
+            
+            // Sonido daño:
+            Sonido(dañoSound);
+        }
+        else if (other.gameObject.tag == "EnemigoTop" && !dañado)
+        {
+            puntuacion += 25;
+            Destroy(other.transform.parent.gameObject);
+        }
+        else if (other.gameObject.tag == "BloqueDestructible")
+        {
+            Destroy(other.gameObject);
+
+            // Sonido al romper el bloque:
+            Sonido(ladrilloSound);
+        }
+        else if (other.gameObject.tag == "CambiarNivel")
+        {
+            puntuacion += 100;
+            
+            // Sonido cambiar de nivel:
+            Sonido(cambiarNivelSound);
+
+            // Guardar datos en playerPrefs para poder usarlos en otros niveles
+            GuardarInfo();
+
+            StartCoroutine(CambioNivelWait(1.0f));
+        }
+    }
+
+    public void Sonido(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
+
+    void MoverHor()
+    {
+        // Mover el jugador horizontalmente:
+        horizontalVel = (cam.transform.TransformDirection(Vector3.right) * horizontalInput.x + cam.transform.TransformDirection(Vector3.forward) * horizontalInput.y) * velocidad;
+        horizontalVel.y = 0;
+
+        // Limitar la velocidad máxima
+        if (horizontalVel.magnitude > velocidad)
+        {
+            horizontalVel = horizontalVel.normalized * velocidad;
+        }
+        controller.Move(horizontalVel * Time.deltaTime);
+
+        // Rotar el personaje hacia donde apunta la camara
+        Vector3 targetDirection = cam.transform.TransformDirection(Vector3.forward);
+        targetDirection.y = 0f;
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 45.0f);
+    }
+
+    void DispararBolaFuego()
+    {
+        // Disparar la bola de fuego y aplicarle movimiento:
+        disparo = false;
+        tiempoUltimoDisparo = 0.0f;
+
+        GameObject fireball = Instantiate(bolaFuegoPrefab, transform.position, transform.rotation);
+        Rigidbody rb = fireball.GetComponent<Rigidbody>();
+        rb.velocity = transform.forward * bolaFuegoSpeed;
+    }
+
+    void GuardarInfo()
+    {
+        // Guardar datos en playerPrefs para poder usarlos en otros niveles
+        PlayerPrefs.SetInt("vidas", vidas);
+        PlayerPrefs.SetInt("salud", salud);
+        PlayerPrefs.SetInt("puntuacion", puntuacion);
+        PlayerPrefs.SetInt("monedas", monedas);
+        PlayerPrefs.Save();
+    }
+
+    void ObtenerInfo()
+    {
+        //* Recoger valores entre escenas
         // Comprobamos si el valor existe en PlayerPrefs, si existe, lo recogemos, sino, lo ponemos a su valor por defecto:
         if (PlayerPrefs.HasKey("vidas"))
         {
@@ -363,101 +476,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        control.Enable();
-    }
-
-    void OnDestroy()
-    {
-        control.Disable();
-    }
-
-    void OnJumpPressed()
-    {
-        jump = true;
-    }
-
-    void OnDisparoPressed()
-    {
-        disparo = true;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        // Si tocamos el lado de un enemigo, perdemos vida, si tocamos su cabeza, le matamos
-        if (other.gameObject.tag == "EnemigoLado")
-        {
-            // Al chocarse con un enemigo de lado, empujar al jugador
-            Vector3 direccion = transform.position - other.transform.position;
-            Vector3 horizontalVel = direccion * 1.5f;
-            horizontalVel.y = 0;
-            controller.Move(horizontalVel);
-        }
-        if (other.gameObject.tag == "EnemigoLado" && !dañado)
-        {
-            // Si recibe daño, no puede dañar ni recibir mas daño durante x tiempo
-            dañado = true;
-            tiempoUltimoDaño = 0.0f;
-
-            salud -= 1;
-            puntuacion -= 50;
-
-            
-
-            // Si salud = 2, cambiar modelo, si salud = 1, reducir tamaño
-            if (salud == 2)
-            {
-                // Desactivar el modelo de fuego
-                playerModels[1].SetActive(false);
-
-                // Activar el modelo normal
-                playerModels[0].SetActive(true);
-            }
-            else if (salud == 1)
-            {
-                // Reducir tamaño
-                CambiarTamaño(false);
-            }
-            
-            // Sonido daño:
-            Sonido(dañoSound);
-        }
-        else if (other.gameObject.tag == "EnemigoTop" && !dañado)
-        {
-            puntuacion += 25;
-            Destroy(other.transform.parent.gameObject);
-        }
-        else if (other.gameObject.tag == "BloqueDestructible")
-        {
-            Destroy(other.gameObject);
-
-            // Sonido al romper el bloque:
-            Sonido(ladrilloSound);
-        }
-        else if (other.gameObject.tag == "CambiarNivel")
-        {
-            puntuacion += 100;
-            
-            // Sonido cambiar de nivel:
-            Sonido(cambiarNivelSound);
-
-            // Se ha de pasar puntuacion, monedas, salud y vidas al siguiente nivel
-            PlayerPrefs.SetInt("vidas", vidas);
-            PlayerPrefs.SetInt("salud", salud);
-            PlayerPrefs.SetInt("puntuacion", puntuacion);
-            PlayerPrefs.SetInt("monedas", monedas);
-            PlayerPrefs.Save();
-
-            StartCoroutine(CambioNivelWait(1.0f));
-        }
-    }
-
-    public void Sonido(AudioClip clip)
-    {
-        audioSource.PlayOneShot(clip);
-    }
-
     // El jugador no se puede mover hasta que acabe la corutina
     IEnumerator RespawnWait(float tiempo)
     {
@@ -475,7 +493,6 @@ public class PlayerController : MonoBehaviour
 
     public void CambiarTamaño(bool aumentar)
     {
-        //! A veces cambia de tamaño mas o menos de la cuenta...
         // Velocidad de disminución de la escala
         float velocidadDisminucion = 1f;
 

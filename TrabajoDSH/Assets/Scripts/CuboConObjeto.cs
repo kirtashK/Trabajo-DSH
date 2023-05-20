@@ -28,10 +28,12 @@ public class CuboConObjeto : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // Si el jugador toca el trigger:
         if (other.gameObject.tag == "Player")
         {
-            Instantiate(prefab, puntoSpawn.transform.position, Quaternion.identity);
-            ////Debug.Log("El jugador ha tocado el trigger.");
+            // Crear el powerUp y desactivar el trigger:
+            //Instantiate(prefab, puntoSpawn.transform.position, Quaternion.identity);
+            Instantiate(prefab, puntoSpawn.transform.position, puntoSpawn.transform.rotation);
             gameObject.SetActive(false);
         }
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,11 +158,11 @@ RectTransform:
   m_Father: {fileID: 913195286}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -241, y: -75}
-  m_SizeDelta: {x: 290.0018, y: 108.8954}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 221.99908, y: -362.5523}
+  m_SizeDelta: {x: 290.0018, y: 108.895386}
+  m_Pivot: {x: 0, y: 1}
 --- !u!23 &155652099
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -350,11 +350,11 @@ RectTransform:
   m_Father: {fileID: 913195286}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0024948}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 114, y: -64.24249}
   m_SizeDelta: {x: 988, y: 555.51}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &213393963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,11 +711,11 @@ RectTransform:
   m_Father: {fileID: 913195286}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.85028, y: 183}
-  m_SizeDelta: {x: 532.9857, y: 108.8954}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 131.65686, y: -104.55229}
+  m_SizeDelta: {x: 532.9857, y: 108.895386}
+  m_Pivot: {x: 0, y: 1}
 --- !u!23 &1028582043
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1047,11 +1047,11 @@ RectTransform:
   m_Father: {fileID: 913195286}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.85028, y: 11}
-  m_SizeDelta: {x: 532.9857, y: 108.8954}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 131.65686, y: -276.5523}
+  m_SizeDelta: {x: 532.9857, y: 108.895386}
+  m_Pivot: {x: 0, y: 1}
 --- !u!23 &2034416926
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1241,11 +1241,11 @@ RectTransform:
   m_Father: {fileID: 913195286}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.85028, y: 94}
-  m_SizeDelta: {x: 532.9857, y: 108.8954}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 131.65686, y: -193.5523}
+  m_SizeDelta: {x: 532.9857, y: 108.895386}
+  m_Pivot: {x: 0, y: 1}
 --- !u!23 &2045530729
 MeshRenderer:
   m_ObjectHideFlags: 0

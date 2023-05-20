@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9128824747177890323
+--- !u!1 &2030873208050412112
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,71 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8501609797163223209}
-  - component: {fileID: 2447585881405932033}
-  - component: {fileID: 4779465464519198476}
-  - component: {fileID: 7327609264627446726}
-  - component: {fileID: 7154124069547481681}
-  - component: {fileID: -1897467340068393649}
-  - component: {fileID: 4197290814572786940}
-  - component: {fileID: 1080800402044498899}
+  - component: {fileID: 4545227867801816948}
+  - component: {fileID: 1741142567812359014}
+  - component: {fileID: 1176087868641150597}
+  - component: {fileID: 9131773556798337345}
+  - component: {fileID: 2550740659479052755}
+  - component: {fileID: 2214659776979878140}
+  - component: {fileID: 6270117465689155501}
+  - component: {fileID: 2007352260000155689}
   m_Layer: 0
-  m_Name: Vida Extra
+  m_Name: GameObject
   m_TagString: VidaExtra
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8501609797163223209
+--- !u!4 &4545227867801816948
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -5.7818174, y: 0.18721187, z: -2.5982316}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_GameObject: {fileID: 2030873208050412112}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -6.784078e-14, w: 0.70710677}
+  m_LocalPosition: {x: 0.00000027630722, y: -0.2973126, z: -0.2377265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 8501609797163223209}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
---- !u!114 &2447585881405932033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb2a5e1bbd0ee0b4380844c175806ea1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 6
-  puedeMoverse: 1
-  forwardDirection: {x: 0, y: 0, z: 1}
-  reflectionIgnoreTags:
-  - Player
-  puntoCaida: {fileID: 3895792020849102634, guid: 969b108702429774f8f3be3d352f2427, type: 3}
-  vidaExtraSound: {fileID: 8300000, guid: 7ee1721cf2798a0419d052b6fbaf14fe, type: 3}
-  monedaSound: {fileID: 8300000, guid: 3b8f41d3d2759aa4bb5940aa601590ea, type: 3}
---- !u!33 &4779465464519198476
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!33 &1741142567812359014
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
+  m_GameObject: {fileID: 2030873208050412112}
   m_Mesh: {fileID: -3996760141626369306, guid: de4230ad63444b44893855014d7d04c8, type: 3}
---- !u!23 &7327609264627446726
+--- !u!23 &1176087868641150597
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
+  m_GameObject: {fileID: 2030873208050412112}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -110,26 +90,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7154124069547481681
+--- !u!65 &9131773556798337345
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
+  m_GameObject: {fileID: 2030873208050412112}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.7562348, y: 0.77833164, z: 0.9501163}
   m_Center: {x: 0.0009410828, y: -0.029793017, z: -0.26}
---- !u!54 &-1897467340068393649
+--- !u!65 &2550740659479052755
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030873208050412112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.75623524, y: 0.77833223, z: 0.1}
+  m_Center: {x: 0.0009410833, y: -0.029793095, z: 0.17}
+--- !u!54 &2214659776979878140
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
+  m_GameObject: {fileID: 2030873208050412112}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -139,26 +132,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &4197290814572786940
-BoxCollider:
+--- !u!114 &6270117465689155501
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 2030873208050412112}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.75623524, y: 0.77833223, z: 0.1}
-  m_Center: {x: 0.0009410833, y: -0.029793095, z: 0.17}
---- !u!82 &1080800402044498899
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2a5e1bbd0ee0b4380844c175806ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 6
+  puedeMoverse: 1
+  forwardDirection: {x: 0, y: 0, z: 1}
+  reflectionIgnoreTags:
+  - Player
+  puntoCaida: {fileID: 3895792020849102634, guid: 969b108702429774f8f3be3d352f2427, type: 3}
+  vidaExtraSound: {fileID: 8300000, guid: 7ee1721cf2798a0419d052b6fbaf14fe, type: 3}
+  monedaSound: {fileID: 8300000, guid: 3b8f41d3d2759aa4bb5940aa601590ea, type: 3}
+--- !u!82 &2007352260000155689
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128824747177890323}
+  m_GameObject: {fileID: 2030873208050412112}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -248,3 +248,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &9128824747177890323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8501609797163223209}
+  m_Layer: 0
+  m_Name: Vida Extra
+  m_TagString: VidaExtra
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8501609797163223209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9128824747177890323}
+  m_LocalRotation: {x: 0.0000004768371, y: -0.00000058114523, z: 2.700569e-13, w: -1}
+  m_LocalPosition: {x: -5.785581, y: 0.76937664, z: -2.016068}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4545227867801816948}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 180, y: -180, z: 180}

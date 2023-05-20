@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a048fc945f84874490822adecf9f798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1316190064508810968, guid: 349109c3a466e8d458088408ede5573f, type: 3}
+  prefab: {fileID: 7708760475120983267, guid: 9e9113843099ea4418d1c03746527938, type: 3}
   puntoSpawn: {fileID: 7429863127696197738}
 --- !u!1 &7429863127696197738
 GameObject:

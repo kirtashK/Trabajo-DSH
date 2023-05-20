@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 7bd72d3f06616ea45805a143855ad0ff, type: 2}
 --- !u!1 &26612289
 GameObject:
   m_ObjectHideFlags: 3
@@ -423,7 +423,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &281635743
 MeshRenderer:
@@ -1034,7 +1034,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!154 &1054257641
 TerrainCollider:
@@ -1421,6 +1421,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TerrainGEN_3Model
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7876d91d1e6774c43b0181b3a6dad19b, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7876d91d1e6774c43b0181b3a6dad19b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7876d91d1e6774c43b0181b3a6dad19b, type: 3}
 --- !u!1001 &1679220739
@@ -1789,7 +1797,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127020448}
-  m_LocalRotation: {x: 0.032932498, y: 0.96705025, z: -0.18141986, w: 0.17554517}
+  m_LocalRotation: {x: 0.0329325, y: 0.96705025, z: -0.18141985, w: 0.1755452}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
