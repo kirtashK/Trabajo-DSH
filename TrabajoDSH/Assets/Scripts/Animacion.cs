@@ -7,6 +7,7 @@ public class Animacion : MonoBehaviour
     [SerializeField] PlayerController playerController;
     Vector3 horizontalVel;
     // Animacion:
+    Vector2 currentMovement;
     Animator animator;
     bool pulsandoMoverse;
     bool pulsandoCorrer;
@@ -22,6 +23,7 @@ public class Animacion : MonoBehaviour
     {
         // Obtener Animator:
         animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class Animacion : MonoBehaviour
             horizontalVel = playerController.horizontalVel;
 
             CambiarAnimacion();
+            handRotate();
         }
     }
 
@@ -75,5 +78,12 @@ public class Animacion : MonoBehaviour
             //Debug.Log("Dejando de saltar...");
             animator.SetBool("isJumping",false);
         }
+    }
+        void handRotate()
+    {
+        Vector3 currentposition = transform.position;
+        Vector3 newPosition = new Vector3(horizontalVel.x,0,horizontalVel.z);
+        Vector3 nuevaDireccion = currentposition + newPosition;
+        transform.LookAt(nuevaDireccion);
     }
 }
