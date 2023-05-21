@@ -6,7 +6,7 @@ using UnityEngine;
 public class BolaDeFuego : MonoBehaviour
 {
     float tiempoInicio;
-
+    public int daño = 1;
     float raycastDistance = 1.0f;
 
     [Tooltip("Lista de tags a ignorar al chocarse")]
@@ -51,8 +51,16 @@ public class BolaDeFuego : MonoBehaviour
         // Si da a un enemigo, matarlo:
         if (other.gameObject.tag == "EnemigoLado" || other.gameObject.tag == "EnemigoTop")
         {
+            
             Destroy(other.transform.parent.gameObject);
             Destroy(gameObject);
+        }
+        if(other.gameObject.tag == "Bowser")
+        {
+
+            other.SendMessage("tocado",daño);
+            Destroy(gameObject);
+
         }
     }
 }

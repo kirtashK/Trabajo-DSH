@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c05d05e4a2d05c541ae5132f94d74626, type: 2}
 --- !u!1 &15568024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,6 +1865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suelo Nieve
       objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
 --- !u!4 &257584640 stripped
@@ -2040,7 +2044,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh234834
+  m_Name: pb_Mesh129054
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2504,6 +2508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suelo Nieve (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
 --- !u!1 &456847233
@@ -2536,6 +2544,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &458790766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458790767}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &458790767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458790766}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.59, y: -14, z: 4.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1551510355}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &467649400
 PrefabInstance:
@@ -9685,6 +9724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suelo Nieve (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
 --- !u!4 &749342769 stripped
@@ -9979,7 +10022,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh234932
+  m_Name: pb_Mesh129158
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10222,7 +10265,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!64 &890737726
 MeshCollider:
@@ -18346,6 +18389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suelo Nieve (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
 --- !u!4 &954345222 stripped
@@ -18678,6 +18725,18 @@ PrefabInstance:
     - target: {fileID: 1529439042553131640, guid: fddb48bad9236a946be292763a4068d1, type: 3}
       propertyPath: m_Name
       value: Huesitos
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871458286852310929, guid: fddb48bad9236a946be292763a4068d1, type: 3}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871458286852310929, guid: fddb48bad9236a946be292763a4068d1, type: 3}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 458790767}
+    - target: {fileID: 1871458286852310929, guid: fddb48bad9236a946be292763a4068d1, type: 3}
+      propertyPath: waypoints.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2193948013734291650, guid: fddb48bad9236a946be292763a4068d1, type: 3}
       propertyPath: m_RootOrder
@@ -19156,7 +19215,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063370671}
-  m_LocalRotation: {x: 0.1050483, y: 0.69926023, z: -0.10504831, w: 0.69926023}
+  m_LocalRotation: {x: 0.10504829, y: 0.6992603, z: -0.105048314, w: 0.6992602}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19272,7 +19331,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -19523,7 +19582,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!64 &1164082587
 MeshCollider:
@@ -21178,6 +21237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suelo Nieve (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
 --- !u!4 &1205650861 stripped
@@ -21282,6 +21345,10 @@ PrefabInstance:
     - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
       propertyPath: m_Name
       value: Suelo Nieve (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
@@ -21861,6 +21928,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suelo Nieve (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
 --- !u!4 &1316538143 stripped
@@ -22273,7 +22344,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!64 &1422697055
 MeshCollider:
@@ -22678,7 +22749,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh234722
+  m_Name: pb_Mesh128938
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22866,6 +22937,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1551510354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1551510355}
+  m_Layer: 0
+  m_Name: Patrullas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1551510355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551510354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.91553, y: 29.095324, z: -2.5220962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 458790767}
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1566417913
 GameObject:
@@ -23163,6 +23266,10 @@ PrefabInstance:
     - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
       propertyPath: m_Name
       value: Suelo Nieve (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
@@ -24096,6 +24203,10 @@ PrefabInstance:
     - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
       propertyPath: m_Name
       value: Suelo Nieve (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941309514083258855, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b08ca49dd9027946bf0707cc36cfe06, type: 3}

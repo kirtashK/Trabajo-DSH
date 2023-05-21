@@ -12,6 +12,7 @@ TagManager:
   - VidaExtra
   - BloqueDestructible
   - CambiarNivel
+  - Bowser
   layers:
   - Default
   - TransparentFX

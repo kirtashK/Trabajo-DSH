@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DetectarJugador : MonoBehaviour
 {
@@ -13,7 +14,13 @@ public class DetectarJugador : MonoBehaviour
     public Transform player;
     //Variable que se activara en el momento que el jugador entre en el rango del enemigo
     public bool alerta;
+
+    public Image barraVida;
+
+    float vidaRestante = 0.0f;
     
+    int vida = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,21 @@ public class DetectarJugador : MonoBehaviour
             //Para que el enemigo mire hacia nostros.
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z),velocidad * Time.deltaTime);
+        } 
+        
+    }
+
+    void tocado (int daño)
+    {
+        Debug.Log("ENEMIGO-ME HAN DADO");
+        vida = vida - daño;
+        vidaRestante = (float)vida / 10;
+        barraVida.transform.localScale = new Vector3(vidaRestante, 1, 1);
+
+        if(vida <= 0)
+        {
+            Destroy(gameObject);
         }
+
     }
 }
