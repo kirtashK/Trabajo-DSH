@@ -25,20 +25,22 @@ public class ComenzarJuego : MonoBehaviour
         Debug.Log("cambio de escena");
         SceneManager.LoadScene(1);
     }
-        private void IrANivel2()
+
+    private void IrANivel2()
     {
         Debug.Log("cambio de escena");
         SceneManager.LoadScene(2);
     }
-        private void IrANivel3()
+
+    private void IrANivel3()
     {
         Debug.Log("cambio de escena");
         SceneManager.LoadScene(3);
     }
-        private void IrANivel4()
+
+    private void IrANivel4()
     {
         Debug.Log("cambio de escena");
         SceneManager.LoadScene(4);
     }
-    
 }

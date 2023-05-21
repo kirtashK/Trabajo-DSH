@@ -21,11 +21,10 @@ public class MenuDerrota : MonoBehaviour
         Debug.Log("cambio de escena");
         SceneManager.LoadScene(1);
     }
-        private void IrAMenu()
+
+    private void IrAMenu()
     {
         Debug.Log("cambio de escena");
         SceneManager.LoadScene(0);
     }
-
-    
 }
