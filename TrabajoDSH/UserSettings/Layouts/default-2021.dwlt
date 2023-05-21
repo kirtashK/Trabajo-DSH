@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Inspector
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 73
+  controlID: 31
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -192,15 +192,15 @@ MonoBehaviour:
     y: 0
     width: 973.6
     height: 508.8
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 17}
   - {fileID: 16}
   - {fileID: 11}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 2
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -277,7 +277,7 @@ MonoBehaviour:
     x: 0
     y: 73.6
     width: 972.6
-    height: 512.6
+    height: 487.8
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -354,9 +354,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 49fe5eb5049c01d4786ef9c17d5bf02b, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 6c3cff9dffa6b00468ee8c05cdd21fbc, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -4310592555803691006, guid: 49fe5eb5049c01d4786ef9c17d5bf02b, type: 2}
+  - m_Target: {fileID: 5543935152569566122, guid: 6c3cff9dffa6b00468ee8c05cdd21fbc, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -460,7 +460,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 91.20001
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -514,14 +514,14 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\UNIVERSIDAD\4CURSO\DSH\UNITY PROYECTS\Trabajo-DSH\TrabajoDSH
+  m_LastProjectPath: C:\Users\Alberto\Documents\GitHub\Trabajo-DSH\TrabajoDSH
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: ca4b0000
     m_LastClickedID: 19402
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000f86b0000fa6b0000fc6b0000fe6b0000006c0000026c0000046c0000066c0000086c00000a6c00000c6c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -546,21 +546,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 285}
+    scrollPos: {x: 0, y: 725}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffffaaa90000d6a90000e6a90000e8a90000f8a90000
+    m_ExpandedIDs: ffffffff00000000f86b0000fa6b0000fc6b0000fe6b0000006c0000026c0000046c0000066c0000086c00000a6c00000c6c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Nivel1
-      m_OriginalName: Nivel1
+      m_Name: Menu
+      m_OriginalName: Menu
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 43512
+      m_UserData: 27760
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -666,7 +666,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -955,9 +955,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -138.96161, y: 58.02126, z: 117.90301}
+    m_Target: {x: 11.5, y: 1.43, z: 0.50000024}
     speed: 2
-    m_Value: {x: -138.96161, y: 58.02126, z: 117.90301}
+    m_Value: {x: 11.5, y: 1.43, z: 0.50000024}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1004,13 +1004,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.091751724, y: 0.44712114, z: 0.04616742, w: -0.88859564}
+    m_Target: {x: -0.12546943, y: 0.24672662, z: -0.03222586, w: -0.96044177}
     speed: 2
-    m_Value: {x: 0.08768287, y: 0.44864184, z: 0.04428473, w: -0.8882967}
+    m_Value: {x: -0.12546293, y: 0.24671385, z: -0.03222419, w: -0.96039206}
   m_Size:
-    m_Target: 135.91408
+    m_Target: 1.6357338
     speed: 2
-    m_Value: 130.06133
+    m_Value: 1.6357338
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1066,23 +1066,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4ef10000
-      m_LastClickedID: 61774
-      m_ExpandedIDs: 6ec3feff4cc5feff00c9feff10f2feff7af2feffbef2feffb2f4fefffaf4feffacf5feff4ef6feff94f6feff1808ffff080affffb60bffff120cffffb40cffff600dffff060effff5c0effffd20effff1c0fffffdc0fffff2c1fffff6650ffff5eaeffff8eafffffe8c800000eca000094ca0000e4ca00002ecc000054cc0000e2e0000054e100001ae500003cee0000
+      m_SelectedIDs: a44dfeff
+      m_LastClickedID: -111196
+      m_ExpandedIDs: ac4dfeffc24dfeffa459feff365dfeff886afeffcce9feffcc08ffff2a3affff806dffff3e73ffff6497fffff4caffff72d1ffffdaf3ffff2cf8ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Directional Light
+        m_OriginalName: Directional Light
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 46782
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
