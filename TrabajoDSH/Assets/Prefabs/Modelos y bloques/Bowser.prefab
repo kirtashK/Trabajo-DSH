@@ -255,8 +255,8 @@ GameObject:
   - component: {fileID: 255669501378525512}
   - component: {fileID: 255669501378525513}
   m_Layer: 0
-  m_Name: Cuerpo
-  m_TagString: Untagged
+  m_Name: Bowser
+  m_TagString: EnemigoLado
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,11 +377,11 @@ GameObject:
   - component: {fileID: 255669502319054123}
   m_Layer: 0
   m_Name: Cabeza
-  m_TagString: Untagged
+  m_TagString: EnemigoTop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &255669502319054122
 Transform:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &255669502646632435
 Transform:
   m_ObjectHideFlags: 0

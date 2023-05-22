@@ -51,16 +51,22 @@ public class BolaDeFuego : MonoBehaviour
         // Si da a un enemigo, matarlo:
         if (other.gameObject.tag == "EnemigoLado" || other.gameObject.tag == "EnemigoTop")
         {
-            
-            Destroy(other.transform.parent.gameObject);
+            if (other.gameObject.name == "Bowser")
+            {
+                other.transform.parent.SendMessage("tocado",daño);
+            }
+            else
+            {
+                Destroy(other.transform.parent.gameObject);
+            }
             Destroy(gameObject);
         }
-        if(other.gameObject.tag == "Bowser")
+        /*if(other.gameObject.tag == "Bowser")
         {
 
             other.SendMessage("tocado",daño);
             Destroy(gameObject);
 
-        }
+        }*/
     }
 }
