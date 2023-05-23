@@ -13,17 +13,10 @@ public class Animacion : MonoBehaviour
     bool pulsandoCorrer;
     bool pulsandoSaltar;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void Awake()
     {
         // Obtener Animator:
         animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
@@ -35,7 +28,7 @@ public class Animacion : MonoBehaviour
             horizontalVel = playerController.horizontalVel;
 
             CambiarAnimacion();
-            handRotate();
+            Rotar();
         }
     }
 
@@ -50,40 +43,36 @@ public class Animacion : MonoBehaviour
 
         if (Mathf.Abs(horizontalVel.x) > velAndar || Mathf.Abs(horizontalVel.z) > velAndar && !isWalking && !isRunning)
         {
-            //Debug.Log("Andando...");
             animator.SetBool("isWalking",true);
         }
         if (Mathf.Abs(horizontalVel.x) <= velAndar && Mathf.Abs(horizontalVel.z) <= velAndar && isWalking && !isRunning)
         {
-            //Debug.Log("Dejando de andar...");
             animator.SetBool("isWalking",false);
         }
         if (isWalking && !isRunning && (Mathf.Abs(horizontalVel.x) > velCorrer || Mathf.Abs(horizontalVel.z) > velCorrer))
         {
-            //Debug.Log("Corriendo...");
             animator.SetBool("isRunning",true);
         }
         if (isRunning && isWalking && Mathf.Abs(horizontalVel.x) <= velCorrer && Mathf.Abs(horizontalVel.z) <= velCorrer)
         {
-            //Debug.Log("Dejando de correr...");
             animator.SetBool("isRunning",false);
         }
         if (!isJumping && playerController.jump && playerController.isGrounded)
         {
-            //Debug.Log("Saltando...");
             animator.SetBool("isJumping",true);
         }
         if (isJumping)
         {
-            //Debug.Log("Dejando de saltar...");
             animator.SetBool("isJumping",false);
         }
-        if (isRunning && isWalking && Mathf.Abs(horizontalVel.x) <= velCorrer && Mathf.Abs(horizontalVel.z) <= velCorrer && Mathf.Abs(horizontalVel.x) <= velAndar && Mathf.Abs(horizontalVel.z) <= velAndar){
+        /*if (isRunning && isWalking && Mathf.Abs(horizontalVel.x) <= velCorrer && Mathf.Abs(horizontalVel.z) <= velCorrer && Mathf.Abs(horizontalVel.x) <= velAndar && Mathf.Abs(horizontalVel.z) <= velAndar)
+        {
             animator.SetBool("isRunning",false);
             animator.SetBool("isWalking",false);
-        }
+        }*/
     }
-        void handRotate()
+
+    void Rotar()
     {
         Vector3 currentposition = transform.position;
         Vector3 newPosition = new Vector3(horizontalVel.x,0,horizontalVel.z);

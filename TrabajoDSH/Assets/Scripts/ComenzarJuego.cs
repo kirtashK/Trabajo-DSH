@@ -9,7 +9,7 @@ public class ComenzarJuego : MonoBehaviour
     [SerializeField] Button btnNivel2;
     [SerializeField] Button btnNivel3;
     [SerializeField] Button btnNivel4;
-
+    [SerializeField] Button btnCreditos;
 
     private void Start()
     {
@@ -18,29 +18,31 @@ public class ComenzarJuego : MonoBehaviour
         btnNivel2.onClick.AddListener(IrANivel2);
         btnNivel3.onClick.AddListener(IrANivel3);
         btnNivel4.onClick.AddListener(IrANivel4);
+        btnCreditos.onClick.AddListener(IrACreditos);
     }
 
     private void IrANivel1()
     {
-        Debug.Log("cambio de escena");
         SceneManager.LoadScene(1);
     }
 
     private void IrANivel2()
     {
-        Debug.Log("cambio de escena");
         SceneManager.LoadScene(2);
     }
 
     private void IrANivel3()
     {
-        Debug.Log("cambio de escena");
         SceneManager.LoadScene(3);
     }
 
     private void IrANivel4()
     {
-        Debug.Log("cambio de escena");
         SceneManager.LoadScene(4);
+    }
+
+    private void IrACreditos()
+    {
+        SceneManager.LoadScene(7);
     }
 }

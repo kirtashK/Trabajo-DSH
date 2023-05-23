@@ -81,9 +81,6 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            // Obtener el script del jugador:
-            //playerController = other.GetComponent<PlayerController>();
-
             if (gameObject.tag == "VidaExtra")
             {
                 playerController.Vidas++;
@@ -91,7 +88,6 @@ public class PowerUp : MonoBehaviour
 
                 // Sonido vida extra:
                 playerController.Sonido(vidaExtraSound);
-                //audioSource.PlayOneShot(vidaExtraSound);
 
                 Destroy(gameObject);
             }
@@ -128,7 +124,6 @@ public class PowerUp : MonoBehaviour
             {
                 // Sonido moneda:
                 playerController.Sonido(monedaSound);
-                //audioSource.PlayOneShot(monedaSound);
 
                 playerController.Monedas++;
                 playerController.Puntuacion += 10;

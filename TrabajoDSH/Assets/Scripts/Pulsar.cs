@@ -13,8 +13,6 @@ public class Pulsar : MonoBehaviour
 
     private void IrANivel1()
     {
-        Debug.Log("cambio de escena");
-       // SceneManager.LoadScene("Nivel1");
         SceneManager.LoadScene(1);
     }
 }

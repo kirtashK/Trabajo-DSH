@@ -12,12 +12,6 @@ public class BolaDeFuego : MonoBehaviour
     [Tooltip("Lista de tags a ignorar al chocarse")]
     [SerializeField] string[] reflectionIgnoreTags;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void Awake()
     {
         tiempoInicio = Time.time;
@@ -48,12 +42,13 @@ public class BolaDeFuego : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Si da a un enemigo, matarlo:
+        // Si da a un enemigo, matarlo y destruir bala:
         if (other.gameObject.tag == "EnemigoLado" || other.gameObject.tag == "EnemigoTop")
         {
+            // Si el enemigo es Bowser, llamar a la funcion tocado
             if (other.gameObject.name == "Bowser")
             {
-                other.transform.parent.SendMessage("tocado",daño);
+                other.transform.parent.SendMessage("tocado", daño);
             }
             else
             {
@@ -61,12 +56,5 @@ public class BolaDeFuego : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        /*if(other.gameObject.tag == "Bowser")
-        {
-
-            other.SendMessage("tocado",daño);
-            Destroy(gameObject);
-
-        }*/
     }
 }

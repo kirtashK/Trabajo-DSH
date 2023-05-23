@@ -40,12 +40,10 @@ public class DetectarJugador : MonoBehaviour
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z),velocidad * Time.deltaTime);
         } 
-        
     }
 
     void tocado (int daño)
     {
-        Debug.Log("ENEMIGO-ME HAN DADO");
         vida = vida - daño;
         vidaRestante = (float)vida / 10;
         barraVida.transform.localScale = new Vector3(vidaRestante, 1, 1);
@@ -54,6 +52,5 @@ public class DetectarJugador : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 }

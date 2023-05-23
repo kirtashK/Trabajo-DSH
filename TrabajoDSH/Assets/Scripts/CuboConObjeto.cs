@@ -14,11 +14,6 @@ public class CuboConObjeto : MonoBehaviour
 
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -32,7 +27,6 @@ public class CuboConObjeto : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             // Crear el powerUp y desactivar el trigger:
-            //Instantiate(prefab, puntoSpawn.transform.position, Quaternion.identity);
             Instantiate(prefab, puntoSpawn.transform.position, puntoSpawn.transform.rotation);
             gameObject.SetActive(false);
         }
